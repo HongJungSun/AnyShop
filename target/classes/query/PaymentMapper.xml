@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="payment">
+
+	<!-- 결제 결과 내용 저장 -->
+	<insert id="regipayComplete" parameterType="HashMap">
+		insert into payment( id, imp_uid, apply_num, product_id, product_price, product_name, product_quantity, product_size, product_color,
+								gender, name, age, height, weight ) 
+		values (#{id}, #{imp_uid}, #{apply_num}, #{product_id}, #{product_price}, #{product_name}, #{product_quantity}, #{product_size}, 
+				#{product_color}, #{gender}, #{name}, #{age}, #{height}, #{weight})
+
+	</insert>
+	
+	<!-- 결제시 회원 포인트 적립 -->
+	<update id="updatePoint">
+		update member
+		set point = #{updatePoint}
+		where id= #{id}
+	</update>
+	
+	
+	<!-- 아이디값으로 회원 기존 point 가져오기 -->
+	<select id="selectId" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select point 
+		from member
+		where id= #{id}
+	</select>
+	
+	<!-- 결제 상품 페이지 에 넘길 결제 정보-->
+	<select id="checkout" resultType="com.syu.anyshop.payment.Payment">
+		select *
+		from payment
+		where id= #{id}
+		and delivery_state in ('N', 'Y')
+		order by date desc
+	</select>
+	
+	<!--  결제된 상품 정보 -->
+	<select id="checkoutPayment" resultType="java.lang.String">
+		select product_img 
+		from product
+		where product_id= #{product_id}
+	</select>
+	
+	<!-- 결제 취소 인증 확인 -->
+	<select id="cancelPayment" resultType="java.lang.Integer">
+		select count(*)
+		from payment
+		where id = #{id}
+		and apply_num = #{cancelPayment}
+		and imp_uid = #{imp_uid}
+	</select>
+	
+
+	<!-- 결제 취소 인증 확인 완료후 결제 취소하기 delivery_state C 로바꾸기 -->
+	<delete id="cancelPaymentComplete">
+		update payment
+		set delivery_state = 'C'
+		where id = #{id}
+		and imp_uid = #{imp_uid}
+	</delete>
+	
+	<!-- 취소시킨 결제 상품에 대한 마일리지 감소를 위한 product_price 값 가져오기 -->	
+	<select id="selectProduct_price" resultType="java.lang.String">
+		select product_price
+		from payment
+		where id= #{id}
+		and apply_num = #{cancelPayment}
+	</select>
+	
+	<!-- 취소된 결제상품 값 * 0.01 만큼 마일리지 감소시키기 -->
+	<update id="minusPoint">
+		update member
+		set point = #{updatePoint} 
+		where id= #{id}
+		
+	</update>
+	
+	
+</mapper>

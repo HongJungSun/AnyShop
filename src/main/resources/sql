@@ -1,0 +1,256 @@
+------- Member 테이블 생성 ------
+CREATE TABLE MEMBER (
+
+  id varchar(50) NOT NULL,
+  pw varchar(20) NOT NULL,
+  name varchar(50) NOT NULL,
+  phone varchar(15) NOT NULL,
+  gender varchar(10) NOT NULL,
+  email varchar(50) NOT NULL,
+  address varchar(100) NOT NULL,
+  point int(100) default 0,
+  height int(10) not null,
+  age int(10) not null,
+  weight int(10) not null,
+ 
+  PRIMARY KEY (id)
+);
+
+
+
+
+----- ORDERLIST (주문 리스트) 테이블 -------------
+CREATE TABLE ORDERLIST(
+    ORDERNUMBER int(100),
+    ID VARCHAR(50) NOT NULL,
+    DELIVERYNUMBER INT(100),
+    ORDERDATE DATETIME,
+    DERLIVERYADDRESS VARCHAR(100) NOT NULL,
+    DELIVERYPHONE VARCHAR(15) NOT NULL,
+    PaymentMethod VARCHAR(20) NOT NULL,
+
+    PRIMARY KEY (ORDERNUMBER) 
+);
+
+
+
+-------- 제품 테이블 생성 ------------
+CREATE TABLE `anyshopdb`.product (
+ `product_id` int( 11 ) NOT NULL AUTO_INCREMENT ,
+ `keyword` varchar(30) not null default All,
+ `product_kinds` varchar(20) NOT NULL,
+ `product_detail` varchar(20) NOT NULL,
+ `product_name` varchar( 50 ) DEFAULT NULL ,
+ `product_price` int( 11 ) DEFAULT '0',
+ `product_info` varchar( 500 ) DEFAULT NULL ,
+ `product_img` varchar( 500 ) DEFAULT NULL ,
+ `product_size` varchar(50) NOT NULL,
+ `product_color` varchar(50) NOT NULL,
+ `moreProductInfo1` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo2` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo3` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo4` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo5` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo6` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo7` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo8` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo9` varchar( 500 ) DEFAULT default.gif ,
+ `moreProductInfo10` varchar( 500 ) DEFAULT default.gif ,
+ `sizeInfo1` varchar( 500 ) DEFAULT default.gif ,
+ `sizeInfo2` varchar( 500 ) DEFAULT default.gif ,
+ `sizeInfo3` varchar( 500 ) DEFAULT default.gif ,
+ 
+ PRIMARY KEY ( `product_id` ) 
+ 
+) ENGINE = MYISAM DEFAULT CHARSET = utf8;
+
+
+
+
+--------- 상품주문 부가정보(옵션) ----------
+
+CREATE TABLE `anyshopdb`.productOption (
+ `product_name` varchar( 50 ) NOT NULL,
+ `moreProductInfo1` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo2` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo3` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo4` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo5` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo6` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo7` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo8` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo9` varchar( 500 ) DEFAULT NULL ,
+ `moreProductInfo10` varchar( 500 ) DEFAULT NULL ,
+ `sizeInfo1` varchar( 500 ) DEFAULT NULL ,
+ `sizeInfo2` varchar( 500 ) DEFAULT NULL ,
+ `sizeInfo3` varchar( 500 ) DEFAULT NULL ,
+ 
+ PRIMARY KEY ( `product_name` ) 
+ 
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+
+
+
+------- 상품문의 게시판 -----------
+CREATE TABLE Board
+(
+    IDX INT PRIMARY KEY auto_increment,
+    product_id int(10) not null,
+    TITLE VARCHAR(100) NOT NULL,
+    CONTENTS VARCHAR(4000) NOT NULL,
+    HIT_CNT INT NOT NULL default 0,
+    DEL_STATE VARCHAR(1) DEFAULT 'N' NOT NULL,
+    REGI_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    REGI_ID VARCHAR(30) NOT NULL
+    
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+
+
+
+
+------------- 페이징 ---------------------
+Create table paging (	    
+
+	    rowCount int(11) not null,  
+	    rowStart int(11) not null, 		  
+	    rowEnd int(11) not null,          
+	    totalPage int(11) not null, 		
+	    totalRow int(11) not null,          
+	    page int(11) not null,  			
+	    pageStart int(11) not null,     
+	    pageEnd int(11) not null
+	             
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+
+
+
+
+-------- 상품문의 댓글 게시판 ----------
+CREATE TABLE replyBoard
+(
+      board_no varchar(11) NOT NULL,                            -- 게시물 번호
+      reply_no varchar(11) NOT NULL,                            -- 댓글 번호
+      reply_writer VARCHAR(10) NOT NULL,                        -- 작성자
+      reply_contents VARCHAR(500) NOT NULL,                     -- 댓글내용
+      reply_regi_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,      -- 작성일자
+      reply_del_state VARCHAR(1) DEFAULT 'N',                   -- 삭제여부
+      
+      REPARENT INT(11) not null,
+      reparent2 int(11) not null,
+      REDEPTH INT not null,
+      REORDER INT not null
+      
+      PRIMARY KEY (reply_no)
+
+  
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+
+
+
+---------------- 리뷰 테이블 --------------------
+create table review (
+	id varchar(50) not null,
+	age int(10) not null,
+	product_id int(10) not null,
+	review_point int(10) not null,
+	review_contents varchar(500) not null,
+	averageAge int(10)
+
+
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+
+
+---------------- 리뷰 연령별 평점 테이블 --------------------
+create table reviewpoint (
+	
+	product_id int(10) not null,
+	review_point10 int(10) default 0,
+ 	review_point20 int(10) default 0,
+ 	review_point30 int(10) default 0,
+ 	review_point40 int(10) default 0,
+ 	review_point50 int(10) default 0,
+ 	
+ 	primary key(product_id)
+	
+
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+
+
+
+
+------------------- searchBox 테이블 -----------------------
+create table searchBox (
+
+	id varchar(10),
+	age varchar(10) not null,
+	gender varchar(10) not null,
+	searchBox varchar(20) not null
+
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+
+
+
+-------- 장바구니 테이블 --------
+create table wishlist(
+ `wishlist_idx` int(50) NOT NULL AUTO_INCREMENT,
+ `id` varchar(50) NOT NULL,
+ `product_id` int( 11 ) NOT NULL,
+ `product_name` varchar( 50 ) NOT NULL ,
+ `product_img` varchar( 500 ) NOT NULL ,
+ `product_price` varchar( 20 ) NOT NULL,
+ `product_size` varchar( 50 ) Not NULL,
+ `product_color` varchar( 50 ) Not NULL,
+ `product_quantity` varchar(10) NOT NULL,
+ 
+ PRIMARY KEY ( `wishlist_idx` ) 
+ 
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+
+
+-------- 상품 테이블 ------------
+CREATE TABLE product (
+ 'product_id' int( 11 ) NOT NULL AUTO_INCREMENT ,
+ 'product_name' varchar( 50 ) DEFAULT NULL ,
+ 'product_price' int( 11 ) DEFAULT '0',
+ 'product_info' varchar( 500 ) DEFAULT NULL ,
+ 'product_img' varchar( 500 ) DEFAULT NULL ,
+ PRIMARY KEY ( 'product_id' ) 
+ 
+) ENGINE = MYISAM DEFAULT CHARSET = utf8;
+
+
+
+
+
+
+-------- 결제 테이블 --------------  
+CREATE TABLE payment (
+  id varchar(20) not null,
+  imp_uid varchar(20) not null,
+  apply_num int(11) not null,
+  product_id int(11) not null,
+  product_price int(11) not null,
+  product_name varchar(30) not null,
+  product_quantity int(10) not null,
+  product_size varchar(20) not null,
+  product_color varchar(20) not null,
+  gender varchar(10) not null,
+  name varchar(20) not null,
+  age int(10) not null,
+  height int(10) not null,
+  weight int(10) not null,
+  delivery_state varchar(5) not null Default 'N',
+  
+  primary key(imp_uid)
+
+) ENGINE = MYISAM DEFAULT CHARSET = utf8
+
+

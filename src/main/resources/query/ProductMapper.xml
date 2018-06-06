@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product">
+    
+    <!-- 상품 전체 목록 -->
+    <select id="productAllList" resultType="com.syu.anyshop.product.ProductInfo">
+        SELECT  
+            *
+        FROM product 
+        WHERE product_kinds= #{product_kinds}
+        ORDER BY product_Id DESC
+    </select>
+    
+       <!-- 상품 detail 목록 -->
+    <select id="productDetailAllList" parameterType="map" resultType="com.syu.anyshop.product.ProductInfo">
+        SELECT  
+            *
+        FROM product 
+        WHERE product_kinds= #{product_kinds}
+        AND   product_detail= #{product_detail}
+        ORDER BY product_Id DESC
+    </select>
+    
+    <!-- 상품 상세 정보 -->
+    <select id="viewProduct" resultType="com.syu.anyshop.product.ProductInfo">
+        SELECT  
+            *
+        FROM product 
+        WHERE product_id= #{product_id}
+    </select>
+    
+    <!-- searchBox 키워드 변화에따라 연관 검색어 보여주기 -->
+     <select id="autocomplete" resultType="com.syu.anyshop.product.ProductInfo">
+        SELECT *
+        FROM product 
+        WHERE product_name like concat('%',#{searchBox},'%')
+        order by product_name desc
+        limit 5
+        
+    </select>
+    
+    <!-- searchbox로 검색한 상품정보 -->
+    <select id="selectNameProductInfo" resultType="com.syu.anyshop.product.ProductInfo">
+        SELECT  
+            *
+        FROM product 
+        WHERE product_name like concat('%',#{searchBox},'%') 
+    
+    </select>    
+    
+	
+</mapper>

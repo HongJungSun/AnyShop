@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="review">
+	
+	<!-- 리뷰 등록 -->
+	<insert id="regiReview" parameterType="com.syu.anyshop.review.ReviewInfo">
+		insert into review (id, age, product_id, product_name, product_img, review_point, review_contents, averageAge)
+		values (#{id}, #{age}, #{product_id}, #{product_name}, #{product_img}, #{review_point}, #{review_contents}, #{averageAge})
+	</insert>
+	
+	<!-- 리뷰 테이블  상품이 등록 되어있는지 확인하기 (없으면 insert 있으면 update) -->
+	<select id="selectProduct_idCount" resultType="java.lang.Integer">
+		select Count(*)
+		from reviewpoint
+		where product_id = #{product_id}
+
+	</select>
+	
+	<!-- 리뷰 테이블  평균 나이대 점수 합 가져오기-->
+	<select id="selectAgeReview_point" resultType="java.lang.Integer">
+		select Sum(review_point)
+		from review
+		where averageAge = #{averageAge}
+
+	</select>
+	
+	<!-- 리뷰 등록한 사람들의  수의 합 가져오기-->
+	<select id="selectCountReview_point" resultType="java.lang.Integer">
+		select Count(*)
+		from review
+		where averageAge = #{averageAge}
+
+	</select>	
+	
+	<!-- 첫 리뷰 등록시 reviewpoint 테이블에 점수 등록-->
+	<insert id="regiReviewPointDefault" parameterType="hashmap">
+		<if test="averageAge == 10">
+			insert reviewpoint( product_id, review_point10)
+			values (#{product_id}, #{review_point})		
+		</if>
+		
+		<if test="averageAge == 20">
+			insert reviewpoint( product_id, review_point20)
+			values (#{product_id}, #{review_point})
+		</if>
+		
+		<if test="averageAge == 30">
+			insert reviewpoint( product_id, review_point30)
+			values (#{product_id}, #{review_point})
+		</if>
+		
+		<if test="averageAge == 40">
+			insert reviewpoint( product_id, review_point40)
+			values (#{product_id}, #{review_point})
+		</if>
+		
+		<if test="averageAge == 50">
+			insert reviewpoint( product_id, review_point50)
+			values (#{product_id}, #{review_point})
+
+		</if>
+	</insert>
+
+	<!-- 상품에 대한 리뷰점수 나이대별 평균 계산후 대입 -->
+	<update id="updateReview">
+		<if test="averageAge == 10">
+			update reviewpoint
+			set review_point10 =  #{sumReview_point} / #{countReview_point}
+			where product_id= #{product_id}
+		</if>
+		<if test="averageAge == 20">
+			update reviewpoint
+			set review_point20 =  #{sumReview_point}  / #{countReview_point}
+			where product_id= #{product_id}
+		</if>
+		<if test="averageAge == 30">
+			update reviewpoint
+			set review_point30 =  #{sumReview_point}  / #{countReview_point}
+			where product_id= #{product_id}
+		</if>
+		<if test="averageAge == 40">
+			update reviewpoint
+			set review_point40 =  #{sumReview_point}  / #{countReview_point}
+			where product_id= #{product_id}
+		</if>
+		<if test="averageAge == 50">
+			update reviewpoint
+			set review_point50 =  #{sumReview_point}  / #{countReview_point}
+			where product_id= #{product_id}
+		</if>
+	</update> 
+	
+	<!--  reviewPoint 정보 가져오기 -->
+	<select id="selectreviewPoint" parameterType="java.lang.String" resultType="com.syu.anyshop.review.ReviewPoint">
+		select * 
+		from reviewpoint
+		where product_id= #{product_id}
+	</select>
+
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wishlist">
+
+	<!--  장바구니 추가 -->  
+	 <insert id="addWishList" parameterType="java.util.Map">
+		INSERT INTO WISHLIST (id, product_id, product_name, product_img, product_price, product_size, product_color, product_quantity)
+		VALUES(#{id}, #{product_id}, #{product_name}, #{product_img}, #{product_priceArray}, #{product_sizeArray}, #{product_colorArray}, #{product_quantityArray}) 
+	</insert>
+
+	<!-- 장바구니 조회 -->
+	  <select id="viewWishList" parameterType="java.lang.String" resultType="com.syu.anyshop.wishlist.WishListInfo">
+		SELECT * FROM WISHLIST
+		<where>
+			id = #{id}
+		</where>
+	</select> 
+	
+	<!-- 장바구니 품목 제거 -->
+	  <delete id="deleteWishList" parameterType="java.lang.String">
+		DELETE FROM wishlist
+		<where>
+			wishlist_idx = #{wishlist_idx}
+		</where>
+	</delete>  
+
+	
+</mapper>

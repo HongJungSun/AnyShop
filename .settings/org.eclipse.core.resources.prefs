@@ -1,0 +1,13 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of https\://github.com/choichanheum/anyshop
+eclipse.preferences.version=1
+encoding//src/main/java/com/syu/anyshop/controller/MainController.java=UTF-8
+encoding//src/main/webapp/WEB-INF/tiles/tile/top.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/child.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/product/productNotFound.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/question_board/loadBoard.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/question_board/questionBoard_Write.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/question_board/readBoard.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/wish/wishlist.jsp=UTF-8
+encoding/<project>=UTF-8

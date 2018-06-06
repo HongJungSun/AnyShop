@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+	<!-- 사용자 tiles -->
+	<definition name="base" template="/WEB-INF/tiles/layout/layout.jsp" >
+		<put-attribute name="header" value="/WEB-INF/tiles/tile/header.jsp" />
+		<!-- <put-attribute name="right" value="/WEB-INF/tiles/tile/right.jsp" /> -->
+	</definition>
+	
+	<!-- 관리자 tiles -->
+	 <definition name="base2" template="/WEB-INF/tiles/layout/layout2.jsp" >
+	 	<put-attribute name="top" value="/WEB-INF/tiles/tile/top.jsp" />
+		<put-attribute name="left" value="/WEB-INF/tiles/tile/left.jsp" /> 
+		<put-attribute name="top2" value="/WEB-INF/tiles/tile/top2.jsp" />
+	</definition> 
+	
+	
+<!-- 	<definition name="/" extends="base" >
+		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+	</definition> -->
+	
+	<!-- <definition name="*" extends="base" >
+		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+	</definition> -->
+	
+	<definition name="*/*" extends="base" >
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	<definition name="*/*/*" extends="base2" >
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
+	
+	<!-- <definition name="empty" template="/WEB-INF/tiles/layout/empty.jsp" >
+		<put-attribute name="content" value="" />
+	</definition> -->
+	
+	<!-- <definition name="empty/*" extends="empty">
+          <put-attribute name="content" value="/WEB-INF/views/{1}.jsp"></put-attribute>        
+    </definition> -->
+	
+</tiles-definitions>

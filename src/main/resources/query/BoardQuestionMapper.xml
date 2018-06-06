@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="questionBoard">
+
+<!-- 상품에 관련 모든 문의 글 가져오기 (keyword 없을 경우) -->
+	<select id="viewAllQuestionBoard" parameterType="com.syu.anyshop.questionBoard.Paging" resultType="com.syu.anyshop.questionBoard.QuestionBoard"> 
+		select idx, product_id, title, regi_id, hit_cnt, DATE_FORMAT(regi_date ,'%Y-%m-%d')regi_date 
+		from board
+		where del_state = 'N'
+		order by idx DESC
+		LIMIT ${rowStart}, 10	
+	</select>
+
+<!-- 상품에 관련 모든 문의 글 가져오기 (keyword 있을 경우) -->
+	<select id="viewAllQuestionBoard2" parameterType="com.syu.anyshop.questionBoard.Paging" resultType="com.syu.anyshop.questionBoard.QuestionBoard"> 
+		select idx, title, regi_id, hit_cnt, DATE_FORMAT(regi_date ,'%Y-%m-%d')regi_date 
+		from board
+		where del_state = 'N'
+		and ${keyword} LIKE CONCAT ('%', ${searchBoard}, '%')
+		order by idx DESC
+		LIMIT ${rowStart}, 10	
+	</select>
+		
+
+	<!-- 상품문의 게시글 저장 -->
+	<insert id="insertQuestionBoard" parameterType="hashmap">
+		insert into board(product_id, title, contents, regi_id)
+		values (#{product_id}, #{title}, #{contents}, #{regi_id});	
+	</insert>
+
+	<!-- 상품문의 글 읽기  -->
+	<select id="readBoard" resultType="com.syu.anyshop.questionBoard.QuestionBoard"> 
+		select idx, product_id, title, contents, hit_cnt, del_state, DATE_FORMAT(regi_date ,'%Y-%m-%d')regi_date, regi_id 
+		from board
+		where idx = #{idx}
+		and DEL_STATE = 'N'
+	</select>
+	
+	<!-- 상품문의 글 수정페이지  -->
+	<select id="updateBoard" resultType="com.syu.anyshop.questionBoard.QuestionBoard"> 
+		select * 
+		from board
+		where idx = #{idx}	
+	</select>		
+	
+	<!-- 상품문의 글 수정하기 -->
+	<update id="updateBoardCommit" parameterType="hashmap">
+		update board 
+		set title=#{title}, contents=#{contents}
+		where idx=#{idx}	
+	</update>
+	
+	<!-- 상품문의 글 삭제 (DEL_STATE를 y로 바꿈)-->
+	<update id="deleteBoard">
+		update board
+		set DEL_STATE = 'Y'
+		where idx= #{idx}
+	</update>
+	
+	<!-- 상품문의 글 읽기 수행시 조회수 증가 -->
+	<update id="addHit_cnt">
+		update board 
+		set hit_cnt= hit_cnt +1
+		where idx=#{idx}
+	</update>	
+	
+	<!-- 한 상품에 대한 총 데이터 갯수 구하기 (keyword없을경우)-->
+	<select id="selectRowCount" resultType="java.lang.Integer">
+		select Count(*)
+		from board
+		where product_id = #{product_id}
+		and del_state = 'N'	
+	</select>
+	
+	<!-- 한 상품에 대한 총 데이터 갯수 구하기 (keyword 있을경우) -->
+	<select id="selectRowCount2" resultType="java.lang.Integer">
+		select Count(*)
+		from board
+		where product_id = #{product_id}
+		and del_state = 'N'	
+		and #{keyword} LIKE CONCAT('%', #{searchBoard},'%' )
+	</select>	
+	
+	<!-- 상품문의  게시판 검색 (제목으로)  -->
+	<select id="searchBoardTitle" resultType="com.syu.anyshop.questionBoard.QuestionBoard"> 
+		select idx, title, regi_id, hit_cnt, DATE_FORMAT(regi_date ,'%Y-%m-%d')regi_date 
+		from board
+		where product_id = #{product_id}
+		and del_state = 'N'
+		and title LIKE CONCAT('%', #{searchBoard},'%' )
+		order by idx DESC
+		LIMIT ${rowStart}, 10	
+	</select>	
+	
+	<!-- 상품문의  게시판 검색 (내용으로) -->
+	<select id="searchBoardContents" resultType="com.syu.anyshop.questionBoard.QuestionBoard"> 
+		select idx, title, regi_id, hit_cnt, DATE_FORMAT(regi_date ,'%Y-%m-%d')regi_date 
+		from board
+		where product_id = #{product_id}
+		and del_state = 'N'
+		and contents LIKE CONCAT('%', #{searchBoard},'%' )
+		LIMIT ${rowStart}, 10	
+	</select>		
+	
+	<!-- 상품문의  게시판 검색 (작성자 id)  -->
+	<select id="searchBoardRegi_id" resultType="com.syu.anyshop.questionBoard.QuestionBoard"> 
+		select idx, title, regi_id, hit_cnt, DATE_FORMAT(regi_date ,'%Y-%m-%d')regi_date 
+		from board
+		where product_id = #{product_id}
+		and del_state = 'N'
+		and regi_id LIKE CONCAT('%', #{searchBoard},'%' )
+		order by idx DESC
+		LIMIT ${rowStart}, 10	
+	</select>				
+
+	<!-- 상품문의 게시판 검색에 대한 총 데이터 갯수 구하기 (제목) -->
+	<select id="selectSearchRowCountTitle" resultType="java.lang.Integer">
+		select Count(*)
+		from board
+		where product_id = #{product_id}
+		and del_state = 'N'
+		and title LIKE CONCAT('%', #{searchBoard},'%' )
+		order by idx DESC	
+	</select>	
+
+	<!-- 상품문의 게시판 검색에 대한 총 데이터 갯수 구하기 (내용)  -->
+	<select id="selectSearchRowCountContents" resultType="java.lang.Integer">
+		select Count(*)
+		from board
+		where product_id = #{product_id}
+		and del_state = 'N'
+		and contents LIKE CONCAT('%', #{searchBoard},'%' )	
+	</select>	
+
+	<!-- 상품문의 게시판 검색에 대한 총 데이터 갯수 구하기 (작성자) -->
+	<select id="selectSearchRowCountRegi_id" resultType="java.lang.Integer">
+		select Count(*)
+		from board
+		where product_id = #{product_id}
+		and del_state = 'N'
+		and regi_id LIKE CONCAT('%', #{searchBoard},'%' )	
+	</select>
+
+	<!-- 상품문의 게시글 답변 저장(MAX(reply_no)가 null일때) -->
+	<insert id="regiReply" parameterType="com.syu.anyshop.questionBoard.ReplyBoard">
+ 		<selectKey resultType="java.lang.String" keyProperty="reply_no" order="BEFORE">
+        	SELECT IFNULL(MAX(reply_no),0)+1 FROM replyboard
+    	</selectKey> 
+	
+		insert into replyboard(board_no, reply_no, reply_writer, reply_contents, reorder, reparent, redepth, reparent2)
+		values (#{board_no}, #{reply_no}, #{reply_writer}, #{reply_contents}, #{reorder},		
+			<choose>
+				<when test="reparent==null">#{reply_no}, 0, #{reply_no}</when>
+                       <otherwise>
+                       		#{reparent}, #{redepth}, #{reparent2}
+                       </otherwise>			
+			</choose>		
+		)	
+	</insert>
+	
+	<!-- 상품문의 게시글 답변 수정(MAX(reply_no)가 null이 아닐 떄)  -->
+	<update id="updateReply" parameterType="com.syu.anyshop.questionBoard.ReplyBoard">
+    	UPDATE replyBoard
+       	SET reply_contents=#{reply_contents} 
+     	WHERE reply_no=#{reply_no}
+	</update> 
+
+	<!-- 댓글 가져오기 (게시글 번호에 대한) -->
+	<select id="selectReplyBoard" resultType="com.syu.anyshop.questionBoard.ReplyBoard">
+		select board_no, reply_no, reply_writer, reply_contents, DATE_FORMAT(reply_regi_date ,'%Y-%m-%d')reply_regi_date, reply_del_state, 
+			   reparent, redepth, reorder, reparent2
+		from replyboard
+		where board_no = #{idx}
+		and reply_del_state = 'N'
+		order by reparent2 asc, reorder asc	
+	</select>	
+	
+	<!-- 부모댓글에 관한 replyBoard 테이블 가져오기 -->
+ 	<select id="selectReplyBoardReparent" resultType="com.syu.anyshop.questionBoard.ReplyBoard" parameterType="String">
+        SELECT board_no, reparent, REDEPTH, REORDER 
+          FROM replyboard
+         WHERE reply_no = #{reparent}
+    </select>
+    
+    <!-- 게시글 번호에 대한 replyboard에 reorder 최대삾이 null이면 +1 시키기 -->
+    <select id="selectReplyBoardMaxOrder" resultType="Integer" parameterType="String">
+        SELECT IFNULL(MAX(REORDER),0)+1
+          FROM replyboard
+         WHERE BOARD_NO = #{board_no}
+    </select>
+
+    
+    <!-- selectReplyBoardReparent 메소드로 가져온 replyboard 보다 reorder가 큰 replyboard에 reorder값 전부 +1 씩 증가시키기 -->
+    <update id="updateReplyBoardReorder" parameterType="com.syu.anyshop.questionBoard.ReplyBoard"> 
+        UPDATE replyboard
+           SET REORDER = REORDER + 1
+         WHERE board_no = #{board_no} AND REORDER > #{reorder}         
+    </update>
+    
+    <!-- 댓글 삭제인 댓글  부모댓글이면 모든 자식댓글 삭제전에 reorder 값 변동시키기  -->
+    <update id="updateReplyBoardBeforeDelete"> 
+     	update replyBoard r1
+     	inner join replyBoard r2
+     	on r2.board_no = r1.board_no
+     	and r1.reorder > #{reorder}
+     	set r1.reorder = r1.reorder -1
+     	where r2.reparent2 = #{reparent2}
+    </update>
+
+   <!-- 게시판 댓글 삭제(꼭대기 댓글이 자기 자신이 아닐때 + 자기 자신일때) -->
+	<delete id="deleteReplyBoard">
+		delete 
+		from replyBoard
+		where reparent2= #{reparent2}
+		and redepth >= #{redepth}
+		and reorder >= #{reorder}
+	</delete>
+    
+
+				
+
+</mapper>
+

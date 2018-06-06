@@ -1,0 +1,21 @@
+package com.syu.anyshop.product;
+
+import java.util.List;
+
+public interface ProductService {
+	List<ProductInfo> productList();
+
+	List<ProductInfo> productAllList(String product_kinds);
+
+	ProductInfo viewProduct(String product_id);
+
+	List<ProductInfo> searchBox(String searchBox);
+
+	List<ProductInfo> productDetailAllList(String product_kinds, String product_detail);
+
+	List<ProductInfo> autocomplete(String searchBox);
+
+	List<ProductInfo> selectNameProductInfo(String searchBox);
+
+	
+}

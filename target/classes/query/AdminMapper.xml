@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+
+	<select id="showAllMember" resultType="com.syu.anyshop.login.LoginInfo">
+        SELECT *
+        FROM member 
+        ORDER BY name DESC
+    </select>
+    
+    <select id="searchMember" resultType="com.syu.anyshop.login.LoginInfo">
+        SELECT *
+        FROM member 
+        WHERE id=#{id}
+        ORDER BY name DESC
+    </select>
+    
+    <update id="updateMember" parameterType="com.syu.anyshop.login.LoginInfo">
+		UPDATE MEMBER
+		SET ID= #{id}, PW= #{pw},  NAME = #{name}, PHONE = #{phone}, GENDER = #{gender}, EMAIL=#{email}, ADDRESS=#{address}
+		<where>
+			ID = #{id}
+		</where>
+	</update> 
+	
+	<!-- 회원등록 -->
+	 <insert id="regiMember" parameterType="com.syu.anyshop.login.LoginInfo">
+		INSERT INTO MEMBER (id, pw, name, phone, gender, email, address)
+		VALUES(#{id}, #{pw}, #{name}, #{phone}, #{gender}, #{email}, #{address}) 
+	</insert> 
+	
+	<!-- 상품 전체목록(관리자 권한, 옵션제외) -->
+	  <select id="selectProductList" resultType="com.syu.anyshop.product.ProductInfo">
+        SELECT *
+        FROM product 
+        ORDER BY product_id ASC
+    </select>
+    
+    
+    <!-- 상품 편집 페이지(관리자 권한, 상품정보) -->
+	  <select id="selectProduct" resultType="com.syu.anyshop.product.ProductInfo">
+        SELECT *
+        FROM product 
+        <where>
+        	product_name=#{product_name}
+        </where>
+      </select>
+    
+      
+      <!-- 상품 편집 commit -->
+     <update id="editProductCommit" parameterType="com.syu.anyshop.product.ProductInfo">
+		UPDATE Product
+		SET product_kinds= #{product_kinds},  product_detail = #{product_detail}, product_name = #{product_name}, product_price = #{product_price}, 
+			product_img=#{product_img}, product_size=#{product_size}, product_color=#{product_color}, product_info=#{product_info}, 
+			moreProductInfo1= #{moreProductInfo1}, moreProductInfo2= #{moreProductInfo2}, moreProductInfo3= #{moreProductInfo3}, moreProductInfo4= #{moreProductInfo4},
+			moreProductInfo5= #{moreProductInfo5}, moreProductInfo6= #{moreProductInfo6}, moreProductInfo7= #{moreProductInfo7}, moreProductInfo8= #{moreProductInfo8},
+			moreProductInfo9= #{moreProductInfo9}, moreProductInfo10= #{moreProductInfo10}, 
+			sizeInfo1= #{sizeInfo1}, sizeInfo2= #{sizeInfo2}, sizeInfo3= #{sizeInfo3}
+		<where>
+			product_id = #{product_id}
+		</where>
+	</update> 
+	
+	 <!--  상품 등록(관리자 권환) -->
+	 <insert id="addProduct" parameterType="com.syu.anyshop.product.ProductInfo">
+	 	INSERT INTO product
+	 	VALUES(#{product_id}, #{keyword}, #{product_kinds}, #{product_detail}, #{product_name}, #{product_price}, #{product_info}, #{product_img},#{product_size}, #{product_color},
+	 			#{moreProductInfo1}, #{moreProductInfo2}, #{moreProductInfo3}, #{moreProductInfo4}, #{moreProductInfo5}, #{moreProductInfo6}, #{moreProductInfo7},
+	 			 #{moreProductInfo8}, #{moreProductInfo9}, #{moreProductInfo10}, #{sizeInfo1}, #{sizeInfo2}, #{sizeInfo3})
+	 </insert>
+	 
+	 <!-- 상품중복등록 검사 -->
+	 <select id="checkProduct" resultType="java.lang.Integer">
+        SELECT Count(*)
+        FROM product 
+        WHERE product_name=#{product_name}
+    </select>
+    
+    <!-- 상품 삭제(관리자 권한) -->
+    <delete id="deleteProduct" parameterType="String">
+
+		delete 
+		from product 
+		where product_name=#{product_name}
+	</delete>
+
+    <!-- 상품 편집 페이지에서 기존 상품파일(이미지)값 가져오기(관리자 권한, 상품정보) -->
+	  <select id="getFile" resultType="com.syu.anyshop.product.ProductInfo">
+        SELECT *
+        FROM product 
+        <where>
+        	product_id=#{product_id}
+        </where>
+      </select>
+      
+    <!-- 장바구니 통계(분석) (관리자 권한) -->  
+	<select id="wishlistStatistics" resultType="com.syu.anyshop.wishlist.WishListInfo">
+        SELECT *
+        FROM wishlist
+        group by product_id 
+        order by Count(product_id) DESC
+    </select>
+    
+    <!-- 장바구니 통계(횟수 분석) (관리자 권한) -->  
+	<select id="wishListCount" resultType="java.lang.Integer">
+        SELECT Count(product_id)
+        FROM wishlist
+        group by product_id 
+        order by Count(product_id) DESC
+    </select>
+    
+    
+    <!-- 총 회원수 구하기 -->
+    <select id="totalMember" resultType="java.lang.Integer">
+    	select count(id)
+    	from member   
+    </select>
+
+    
+    <!-- 총 상품 수량 -->
+    <select id="totalProduct" resultType="java.lang.Integer">
+    	select count(*)
+    	from product
+    </select>
+	 	 
+	<!-- 리뷰 상품 분석 -->
+	<select id="reviewStatistics" resultType="com.syu.anyshop.review.ReviewInfo">
+		select * 
+		from review
+	</select>
+	
+	<!-- 연관검색어 통계(여자) -->
+	<select id="womenSearchBoxStatistics" resultType="java.lang.String">
+		select searchBox
+		from searchBox
+        where gender= '여자'
+		Group by searchBox
+		order by count(searchBox) desc
+		limit 10
+
+	</select>	 
+	 
+	<!-- 연관검색어 통계 (남자)-->
+	<select id="manSearchBoxStatistics" resultType="java.lang.String">
+		select searchBox
+		from searchBox
+        where gender= '남자'
+		Group by searchBox
+		order by count(searchBox) desc
+		limit 10
+
+	</select>	 	 
+	 
+	<!-- 연관검색어 검색 횟수(여자)-->
+	<select id="womenSearchBoxCountList" resultType="java.lang.Integer">
+		select count(searchBox) as count
+		from searchBox
+        where gender= '여자'
+		Group by searchBox
+		order by count(searchBox) desc
+		limit 10
+
+	</select>	 
+
+	<!-- 연관검색어 검색 횟수(남자)-->
+	<select id="manSearchBoxCountList" resultType="java.lang.Integer">
+		select count(searchBox) as count
+		from searchBox
+        where gender= '남자'
+		Group by searchBox
+		order by count(searchBox) desc
+		limit 10
+
+	</select>	 
+	 
+	 <!-- 매출 통계 -->
+	 <select id="paymentStatistics" resultType="com.syu.anyshop.payment.Payment">
+	 	select *
+	 	from payment
+        group by product_name
+	    order by Count(product_id) desc
+	 </select>
+	 
+	 <!-- 매출 통계에 상품 이미지 -->
+	 <select id="productImgList" resultType="java.lang.String">
+	 	select product_img
+	 	from product
+        where product_id = #{product_id}
+	 </select>	 
+	 
+	 <!-- 매출 통계에 팔린 수량 -->
+	 <select id="soldQuantityList" resultType="java.lang.Integer">
+	 	select count(product_id)
+	 	from payment
+        group by product_id
+		order by Count(product_id) desc
+	 </select>
+
+	 <!-- 매출 통계에 팔린 총 가격합 -->
+	 <select id="soldPriceList" resultType="java.lang.Integer">
+	 	select product_price
+	 	from product
+		where product_id = #{product_id}
+	 </select>		 	 	 
+	 
+	 <!-- 매출 통계 팔린 총 가겨합 구하기 위한 count -->
+	 <select id="getQuantity" resultType="java.lang.Integer">
+	 	select count(*)
+	 	from payment
+	 	where product_id = #{product_id}
+	 </select>
+	 
+	 <!-- 전체 팔린 상품 보기 (등수x) -->
+	 <select id="allPaymentStatistics" resultType="com.syu.anyshop.payment.Payment">
+	 	select *
+	 	from payment
+	 </select>	 
+	 
+	 <!-- searchBox 엑셀 파일 만들기 위한 전체 데이터 가져오기 -->
+	 <select id="allSearchBoxExcel" resultType="com.syu.anyshop.searchBox.SearchBoxInfo">
+	 	select * 
+	 	from searchBox
+	 </select>
+	 
+	 <!-- 장바구니 엑셀 파일 만들기 위한 전체 데이터 가져오기 -->
+	 <select id="wishListExcel" resultType="com.syu.anyshop.wishlist.WishListInfo">
+	 	select *
+	 	from wishlist 
+	 </select>
+	 
+	 <!-- 장바구니 엑셀 상품 대분류 -->
+	 <select id="product_kinds" resultType="java.lang.String">
+	 	select product_kinds
+	 	from product
+	 	where product_id = #{product_id}
+	 </select>
+
+	<!-- 장바구니 엑셀 상품 소분류 -->
+	 <select id="product_detail" resultType="java.lang.String">
+	 	select product_detail
+	 	from product
+	 	where product_id = #{product_id}
+	 </select>
+	 
+	 <!-- 리뷰 데이터 엑셀파일로 만들기 위해 가져오기-->
+	 <select id="reviewExcel" resultType="com.syu.anyshop.review.ReviewInfo">
+	 	select *
+	 	from review
+	 </select>
+	 
+	 <!-- 미 배송중인 결제 상품 가져오기 -->
+	 <select id="selectDelivery" resultType="com.syu.anyshop.payment.Payment">
+	 	select * 
+	 	from payment
+	 	where delivery_state = 'N'
+	 </select>
+	 
+	 
+	 <!-- 배송 준비중 상품 배송 보내기 -->
+	 <update id="updatePaymentDelivery_state">
+	 	update payment
+	 	set delivery_state = 'Y'
+	 	where apply_num = #{apply_num}
+	 </update>
+	 
+	 <!-- 배송 중 상품 보기 -->
+	 <select id="selectDeliveryStart" resultType="com.syu.anyshop.payment.Payment">
+	 	select *
+	 	from payment
+	 	where delivery_state = 'Y'
+	 </select>
+	 
+	 <!-- 배송중 상품 주소 구하기 -->
+	 <select id="selectAddress" resultType="java.lang.String">
+	 	select address
+	 	from member
+	 	where id = #{id}
+	 </select>
+	 
+	 <!-- 주문 취소 상품 가져오기 -->
+	 <select id="cancelDelivery" resultType="com.syu.anyshop.payment.Payment">
+	 	select *
+	 	from payment
+	 	where delivery_state = 'C'
+	 </select>
+	 
+	 <!-- 미 배송 상품 -->
+	 <select id="delivery_state_N" resultType="java.lang.Integer">
+	 	select Count(*)
+	 	from payment
+	 	where delivery_state= 'N'
+	 </select>
+
+	 <!-- 배송 상품 -->
+	 <select id="delivery_state_Y" resultType="java.lang.Integer">
+	 	select Count(*)
+	 	from payment
+	 	where delivery_state= 'Y'
+	 </select>
+
+	 <!-- 배송 취소 상품 -->
+	 <select id="delivery_state_C" resultType="java.lang.Integer">
+	 	select Count(*)
+	 	from payment
+	 	where delivery_state= 'C'
+	 </select>
+	
+	 <!-- 오늘 총 매출 -->
+	 <select id="totalPayment" resultType="java.lang.String">
+	 	select product_price
+	 	from payment
+	 	where delivery_state in('N', 'Y')
+	 	and date like concat('%', #{date}, '%')
+	 </select>	 	 
+	 
+	 <!-- 오늘 총매출 구하기 위한 payment 길이 구하기 -->
+	 <select id="todayPaymentList" resultType="java.lang.Integer">
+	 	select count(*)
+	 	from payment
+	 	where date like concat('%', #{date}, '%')
+	 </select>
+	 
+	 <!-- 관리자 메인페이지 매충 통계 그래프 값 수치  -->
+	 <select id="selectDateList" resultType="com.syu.anyshop.payment.Payment">
+	 	select *
+	 	from payment
+	 	where date &gt; date_format(now(),'%Y-00-00')
+		and date &lt; #{startDate}
+	 </select>
+	 
+	 <!-- 해당 년도 선택시 보여질 매출 통계 그래프 -->
+	 <select id="showSales" resultType="com.syu.anyshop.payment.Payment">
+	 	select *
+	 	from payment
+	 	where date &gt; #{startDate}
+	 	and date &lt; #{endDate}
+	 </select>
+	 
+	 
+	 
+	 	 
+</mapper>
