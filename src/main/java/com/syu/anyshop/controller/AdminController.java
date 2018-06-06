@@ -643,7 +643,6 @@ public class AdminController {
 		@ResponseBody
 		@RequestMapping(value = "allSearchBoxExcel.do")
 		public HashMap<String,Integer> searchBoxExcel() {
-			
 			HashMap<String,Integer> map1 = new HashMap<String,Integer>();
 			 		
 			List<SearchBoxInfo> searchBoxList = adminService.allSearchBoxExcel();

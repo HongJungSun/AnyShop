@@ -1,7 +1,6 @@
 package com.syu.anyshop.admin;
 
 import java.util.List;
-import java.util.Map;
 
 import com.syu.anyshop.login.LoginInfo;
 import com.syu.anyshop.payment.Payment;
