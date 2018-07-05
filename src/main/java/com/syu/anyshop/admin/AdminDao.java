@@ -97,6 +97,8 @@ public interface AdminDao {
 
 	List<Payment> showSales(String year);
 
+	List<Payment> allExcel();
+
 
 
 }

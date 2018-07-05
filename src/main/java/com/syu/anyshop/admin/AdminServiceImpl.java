@@ -1,7 +1,6 @@
 package com.syu.anyshop.admin;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -281,6 +280,12 @@ public class AdminServiceImpl implements AdminService{
 	public List<Payment> showSales(String year) {
 		
 		return adminDao.showSales(year);
+	}
+
+	@Override
+	public List<Payment> allExcel() {
+		
+		return adminDao.allExcel();
 	}
 
 

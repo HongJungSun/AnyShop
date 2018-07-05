@@ -55,7 +55,8 @@
                       <li><a href="wishlistStatistics.do">장바구니 통계(분석)</a></li>
                       <li><a href="searchBoxStatistics.do">연관 검색 통계(분석)</a></li>
                       <li><a href="paymentStatistics.do"> 매출 통계(분석) </a></li>
-                      <li><a href="allStatistics.do"> 전체 통계(분석) </a></li>
+                      <li><a href="allStatistics.do"> 나이 통계(분석) </a></li>
+                      <li><a href="allStatistics1.do"> 키 통계(분석) </a></li>
                     </ul>
                   </li>
                 </ul>

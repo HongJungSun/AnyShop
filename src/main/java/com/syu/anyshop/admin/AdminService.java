@@ -1,7 +1,6 @@
 package com.syu.anyshop.admin;
 
 import java.util.List;
-import java.util.Map;
 
 import com.syu.anyshop.login.LoginInfo;
 import com.syu.anyshop.payment.Payment;
@@ -97,6 +96,8 @@ public interface AdminService {
 	List<Payment> selectDateList(String startDate);
 
 	List<Payment> showSales(String year);
+
+	List<Payment> allExcel();
 
 
 

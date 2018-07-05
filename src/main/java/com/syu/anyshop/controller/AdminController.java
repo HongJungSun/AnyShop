@@ -871,14 +871,14 @@ public class AdminController {
 			
 		}
 
-		/*//전체 통계 엑셀파일로 만들기 (관리자)
+		//전체 통계 엑셀파일로 만들기 (관리자)
 		@ResponseBody
 		@RequestMapping(value = "allStatistics.do")
 		public HashMap<String,Integer> allStatistics() {
 					
 			HashMap<String,Integer> map1 = new HashMap<String,Integer>();
 					 		
-			List<Map<String,String>> allList = adminService.allExcel();
+			List<Payment> allList = adminService.allExcel();
 			
 			// 엑셀파일 만들기 		
 			Map<String,String> headerList = new HashMap<String,String>();
@@ -894,8 +894,6 @@ public class AdminController {
 			headerList.put("6", "상품 가격");
 			headerList.put("7", "상품 사이즈");
 			headerList.put("8", "상품 색상");
-			headerList.put("9", "상품 점수");
-			headerList.put("10", "검색 단어");
 					
 			//XSSFWorkbook 세팅
 			XSSFWorkbook workbook = new XSSFWorkbook();
@@ -923,17 +921,15 @@ public class AdminController {
 						//i-1을하는이유는 headerList가 i번쨰 row이기 때문.
 						//Map<String, String> excelData = data.get(i-1); 
 						//리스트의 크기만큼 세팅합니다.
-						list.put("0", allList.get(i-1).get("name"));
-						list.put("1", allList.get(i-1).get("name"));
-						list.put("2", allList.get(i-1).get("name"));
-						list.put("3", allList.get(i-1).get("name"));
-						list.put("4", allList.get(i-1).get("name"));
-						list.put("5", allList.get(i-1).get("name"));
-						list.put("6", allList.get(i-1).get("name"));
-						list.put("7", allList.get(i-1).get("name"));
-						list.put("8", allList.get(i-1).get("name"));
-						list.put("9", allList.get(i-1).get("name"));
-						list.put("10", allList.get(i-1).get("name"));
+						list.put("0", allList.get(i-1).getName());
+						list.put("1", String.valueOf(allList.get(i-1).getHeight()).replaceAll(",", ""));
+						list.put("2", String.valueOf(allList.get(i-1).getAge()));
+						list.put("3", allList.get(i-1).getGender());
+						list.put("4", String.valueOf(allList.get(i-1).getWeight()));
+						list.put("5", allList.get(i-1).getProduct_name());
+						list.put("6", allList.get(i-1).getProduct_price().replaceAll(",", ""));
+						list.put("7", allList.get(i-1).getProduct_size());
+						list.put("8", allList.get(i-1).getProduct_color());
 
 					
 						cell.setCellValue(list.get(Integer.toString(k)));
@@ -959,7 +955,7 @@ public class AdminController {
 					
 			return map1;
 			
-		}	*/
+		}
 		
 		// 주문 관리 ( 미 배송 주문 상품 가져오기)
 		@RequestMapping(value = "delivery.do")

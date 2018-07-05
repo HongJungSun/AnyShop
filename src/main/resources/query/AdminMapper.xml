@@ -337,6 +337,11 @@
 	 	and date &lt; #{endDate}
 	 </select>
 	 
+	 <!-- 빅분론 -->
+	 <select id="allExcel"  resultType="com.syu.anyshop.payment.Payment">
+	 	select *
+	 	from payment
+	 </select>
 	 
 	 
 	 	 

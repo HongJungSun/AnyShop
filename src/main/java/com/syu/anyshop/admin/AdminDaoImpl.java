@@ -1,9 +1,7 @@
 package com.syu.anyshop.admin;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -292,36 +290,11 @@ public class AdminDaoImpl implements AdminDao{
 		return sqlSession.selectList("admin.showSales", map);
 	}
 
-/*	@Override
-	public List<Map<String, String>> allExcel() {
+	@Override
+	public List<Payment> allExcel() {
 		
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-				
-		List<Payment> paymentList = sqlSession.selectList("admin.allPaymentStatistics");
-		List<SearchBoxInfo> searchBoxList = sqlSession.selectList("admin.allSearchBoxExcel");
-		List<ReviewInfo> reviewList = sqlSession.selectList("admin.reviewExcel");
-		
-		
-		for(int i=0; i < 100; i++) {
-			
-			Map<String, String> map= new HashMap<String, String>();
-			
-			map.put("name", paymentList.get(i).getName());
-			map.put("height", paymentList.get(i).getName());
-			map.put("age", paymentList.get(i).getName());
-			map.put("gender", paymentList.get(i).getName());
-			map.put("weight", paymentList.get(i).getName());
-			map.put("product_name", paymentList.get(i).getName());
-			map.put("product_price", paymentList.get(i).getName());
-			map.put("product_size", paymentList.get(i).getName());
-			map.put("product_color", paymentList.get(i).getName());
-			map.put("review_point", String.valueOf( reviewList.get(i).getReview_point()) );
-			map.put("searchBox", searchBoxList.get(i).getSearchBox());
-			
-		}
-		
-		
-		return list;
+		return sqlSession.selectList("admin.allExcel");
 	}
-*/
+
+
 }
