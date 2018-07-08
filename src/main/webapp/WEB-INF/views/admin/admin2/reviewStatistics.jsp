@@ -27,9 +27,7 @@
     		});
     	}
     
-    
-    </script>    
-
+   </script>
 <div class="row">
               <div class="col-md-12">
                 <div class="x_panel">
@@ -60,6 +58,8 @@
                     </div>
 
                     <!-- start project list -->
+                    
+                              
                     <table class="table table-striped projects">
                       <thead>
                         <tr>
@@ -107,9 +107,10 @@
                        </c:forEach>
                       </tbody>
                     </table>
-                    <!-- end project list -->
+                                         
 
                   </div>
                 </div>
               </div>
             </div>
+            

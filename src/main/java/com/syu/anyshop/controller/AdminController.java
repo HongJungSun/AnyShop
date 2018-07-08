@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syu.anyshop.admin.AdminService;
 import com.syu.anyshop.login.LoginInfo;
+import com.syu.anyshop.paging.Page;
 import com.syu.anyshop.payment.Payment;
 import com.syu.anyshop.product.ProductInfo;
 import com.syu.anyshop.review.ReviewInfo;
@@ -152,13 +153,42 @@ public class AdminController {
 
 	// 회원 전체 목록 
 	@RequestMapping(value = "showAllMember.do")
-	public String showMembert(Model model, HttpServletRequest request) {
+	public String showMembert(Model model, Page page, String pageNum1, String contentNum1) {
 		logger.info("Welcome adminController showAllMember! "+ new Date());
 		
-
-		List<LoginInfo> list= new ArrayList<LoginInfo>();
-		list= adminService.showAllMember();
-		model.addAttribute("list",list);
+		int pageNum =0;
+		int contentNum= 0;
+		
+		if(pageNum1 == null) {
+			pageNum=1;
+		} else {
+			pageNum = Integer.parseInt(pageNum1);
+		}
+		if(contentNum1 == null) {
+			contentNum = 10;
+		} else {
+			contentNum = Integer.parseInt(contentNum1);
+		}			
+		
+		page.setTotalCount(adminService.totalMember());		        // 전체 회원수
+		page.setPageNum(pageNum-1);                                	// 현재 페이지를 페이지 객체에 지정, -1을 해야 쿼리에서 사용가능 (limit은 0부터기때문에)
+		page.setContentNum(contentNum);                             // 한페이지에 몇개씩 게시글을 보여줄지 설정
+		page.setCurrentBlock(pageNum);                              // 현제 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정
+		page.setLastBlock(page.getTotalCount());					// 마지막 블록 번호를 전체 게시글 수를 통해서  정한다.
+		
+		
+		page.prevNext(pageNum);                                         // 현재 페이지 번호로 화살표를 나타낼지 정한다
+		page.setStartPage(page.getCurrentBlock());                      // 시작 페이지를 페이지 블록 번호로 정한다.
+		page.setEndPage(page.getLastBlock(), page.getCurrentBlock());   // 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+		
+		
+		List<LoginInfo> list = new ArrayList<LoginInfo>();
+		list = adminService.getMemberPagingData(page.getPageNum()*10, page.getContentNum());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);
+		
+		
 		
 		return "admin/admin2/memberView";
 	}
@@ -228,14 +258,42 @@ public class AdminController {
 		
 		//상품 전체목록(관리자 권한, 옵션제외)
 		@RequestMapping(value = "selectProductList.do")
-		public String selectProductList(Model model) {
+		public String selectProductList(Model model, String pageNum1, String contentNum1, Page page) {
 			logger.info("Welcome adminController selectProductList! "+ new Date());
 			
-			List<ProductInfo> list= new ArrayList<ProductInfo>();
+			int pageNum =0;
+			int contentNum= 0;
 			
-			list= adminService.selectProductList();			
-			model.addAttribute("productList", list);
-						
+			if(pageNum1 == null) {
+				pageNum=1;
+			} else {
+				pageNum = Integer.parseInt(pageNum1);
+			}
+			if(contentNum1 == null) {
+				contentNum = 10;
+			} else {
+				contentNum = Integer.parseInt(contentNum1);
+			}			
+			
+			page.setTotalCount(adminService.totalPagingCount());		// 전체 게시글 수 구하기
+			page.setPageNum(pageNum-1);                                	// 현재 페이지를 페이지 객체에 지정, -1을 해야 쿼리에서 사용가능 (limit은 0부터기때문에)
+			page.setContentNum(contentNum);                             // 한페이지에 몇개씩 게시글을 보여줄지 설정
+			page.setCurrentBlock(pageNum);                              // 현제 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정
+			page.setLastBlock(page.getTotalCount());					// 마지막 블록 번호를 전체 게시글 수를 통해서  정한다.
+			
+			
+			page.prevNext(pageNum);                                         // 현재 페이지 번호로 화살표를 나타낼지 정한다
+			page.setStartPage(page.getCurrentBlock());                      // 시작 페이지를 페이지 블록 번호로 정한다.
+			page.setEndPage(page.getLastBlock(), page.getCurrentBlock());   // 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+			
+			
+			List<ProductInfo> pageList = new ArrayList<ProductInfo>();
+			pageList = adminService.getProductPagingData(page.getPageNum()*10, page.getContentNum());
+			
+			model.addAttribute("pageList", pageList);
+			model.addAttribute("page", page);
+			
+			
 			return "admin/admin2/selectProductList";
 		}
 	
@@ -332,14 +390,41 @@ public class AdminController {
 
 		//상품 review 통계(관리자)
 		@RequestMapping(value = "reviewStatistics.do")
-		public String productStatistics(Model model) {
+		public String productStatistics(Model model, String pageNum1, String contentNum1, Page page) {
 			logger.info("Welcome adminController reviewStatistics! "+ new Date());
 							
-			List<ReviewInfo> reviewList = adminService.reviewStatistics();
+			int pageNum =0;
+			int contentNum= 0;
 			
-			model.addAttribute("reviewList", reviewList);
+			if(pageNum1 == null) {
+				pageNum=1;
+			} else {
+				pageNum = Integer.parseInt(pageNum1);
+			}
+			if(contentNum1 == null) {
+				contentNum = 10;
+			} else {
+				contentNum = Integer.parseInt(contentNum1);
+			}			
 			
-				
+			page.setTotalCount(adminService.totalReviewStatistics());		        // 전체 회원수
+			page.setPageNum(pageNum-1);                                	// 현재 페이지를 페이지 객체에 지정, -1을 해야 쿼리에서 사용가능 (limit은 0부터기때문에)
+			page.setContentNum(contentNum);                             // 한페이지에 몇개씩 게시글을 보여줄지 설정
+			page.setCurrentBlock(pageNum);                              // 현제 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정
+			page.setLastBlock(page.getTotalCount());					// 마지막 블록 번호를 전체 게시글 수를 통해서  정한다.
+			
+			
+			page.prevNext(pageNum);                                         // 현재 페이지 번호로 화살표를 나타낼지 정한다
+			page.setStartPage(page.getCurrentBlock());                      // 시작 페이지를 페이지 블록 번호로 정한다.
+			page.setEndPage(page.getLastBlock(), page.getCurrentBlock());   // 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+			
+			
+			List<ReviewInfo> list = new ArrayList<ReviewInfo>();
+			list = adminService.getReviewStatisticsPagingData(page.getPageNum()*10, page.getContentNum());
+			
+			model.addAttribute("reviewList", list);
+			model.addAttribute("page", page);
+						
 			return "admin/admin2/reviewStatistics";
 
 		}	 
@@ -962,7 +1047,7 @@ public class AdminController {
 		public String delivery(Model model) {
 			logger.info("Welcome adminController delivery! "+ new Date());
 			
-
+					
 			List<Payment> deliveryList= new ArrayList<Payment>();
 			deliveryList= adminService.selectDelivery();
 			List<String> product_img_list= new ArrayList<String>();
@@ -1102,6 +1187,34 @@ public class AdminController {
 								
 			return map;
 		}		
+		
+		
+		// 페이징 해서 데이터 가져오기
+		/*@RequestMapping(value = "selectProductPaging.do")
+		public String selectProductPaging(int pageNum, int contentNum, Model model) {
+			
+			page.setTotalCount(adminService.totalPagingCount());		// 전체 게시글 수 구하기
+			page.setPageNum(pageNum-1);                                	// 현재 페이지를 페이지 객체에 지정, -1을 해야 쿼리에서 사용가능 (limit은 0부터기때문에)
+			page.setContentNum(contentNum);                             // 한페이지에 몇개씩 게시글을 보여줄지 설정
+			page.setCurrentBlock(pageNum);                              // 현제 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정
+			page.setLastBlock(page.getTotalCount());					// 마지막 블록 번호를 전체 게시글 수를 통해서  정한다.
+			
+			
+			page.prevNext(pageNum);                                         // 현재 페이지 번호로 화살표를 나타낼지 정한다
+			page.setStartPage(page.getCurrentBlock());                      // 시작 페이지를 페이지 블록 번호로 정한다.
+			page.setEndPage(page.getLastBlock(), page.getCurrentBlock());   // 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+			
+			
+			List<Page> pageList = new ArrayList<Page>();
+			pageList = adminService.getPagingData(page.getPageNum()*10, page.getContentNum());
+			
+			model.addAttribute("pageList", pageList);
+			model.addAttribute("page", page);
+			
+			
+			return "admin/admin2/selectProductList.do";
+			
+		}*/
 		
 			
 		

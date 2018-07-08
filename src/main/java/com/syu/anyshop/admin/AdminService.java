@@ -99,6 +99,16 @@ public interface AdminService {
 
 	List<Payment> allExcel();
 
+	int totalPagingCount();
+
+	List<ProductInfo> getProductPagingData(int getPageNum, int contentNum);
+
+	List<LoginInfo> getMemberPagingData(int getPageNum, int contentNum);
+
+	int totalReviewStatistics();
+
+	List<ReviewInfo> getReviewStatisticsPagingData(int getPageNum, int contentNum);
+
 
 
 

@@ -7,6 +7,17 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script>
+	function page(idx) {
+		var pageNum = idx;
+		var contentNum = 10;
+		
+		location.href="showAllMember.do?pageNum1="+ pageNum +"&contentNum1="+ contentNum;
+	}
+
+</script>
+
+
             <div class="page-title">
               <div class="title_left">
                 <h3>Any Shop </h3>
@@ -88,6 +99,25 @@
                         </c:forEach>                                                
                       </tbody>
                    </table>
+                 	 <!-- 페이징 처리 -->  
+                    		<nav>
+                      			<ul class="pagination" id="res">
+	                      			<c:if test="${page.prev }">
+	                      				<li class="page"> <a href="javascript:page(${page.getStartPage() -1 });" >&laquo;</a> </li>
+	                      			</c:if>
+	                      			
+	                      			<c:forEach begin="${page.getStartPage() }" end="${page.getEndPage() }" var="idx">
+	                      				<li class="page"> <a href="showAllMember.do?pageNum1=${idx}&contentNum1=${page.contentNum}"> ${idx }</a>	</li>
+	                      			
+	                      			</c:forEach>
+	                      			                    			
+	                      			<c:if test="${page.next }">
+	                      				<li class="page"> <a href="javascript:page(${page.getEndPage() +1 });" >&raquo;</a> </li>
+	                      			</c:if>
+                      			</ul>
+ 							</nav>
+ 						<!-- / 페이징 처리 -->                   
+                   
                  </div>
                </div>
                

@@ -130,6 +130,22 @@
 		from review
 	</select>
 	
+	<!-- 리뷰 상품 분석 페이징 위한 총 갯수 -->
+	<select id="totalReviewStatistics" resultType="java.lang.Integer">
+		select count(*) 
+		from review
+	</select>
+	
+	<!-- 회원 페이징을 위한 현재 블록에서 가져올 데이터 가져오기 --> 
+	<select id="getReviewStatisticsPagingData"  resultType="com.syu.anyshop.review.ReviewInfo">
+		select * 
+		from review
+		order by product_id desc
+		limit #{pageNum}, #{contentNum}
+	</select>
+	
+	
+	
 	<!-- 연관검색어 통계(여자) -->
 	<select id="womenSearchBoxStatistics" resultType="java.lang.String">
 		select searchBox
@@ -337,11 +353,30 @@
 	 	and date &lt; #{endDate}
 	 </select>
 	 
-	 <!-- 빅분론 -->
-	 <select id="allExcel"  resultType="com.syu.anyshop.payment.Payment">
-	 	select *
-	 	from payment
-	 </select>
+	<!-- 상품 페이징을 위한 현재 블록에서 가져올 데이터 가져오기 -->
+	<select id="getProductPagingData" resultType="com.syu.anyshop.product.ProductInfo">
+		select * 
+		from product
+		order by product_id desc
+		limit #{pageNum}, #{contentNum}
+	
+	</select>
+	
+	<!-- 상품 페이징을 위한 전체 데이터 수 구하기 --> 
+	<select id="totalPagingCount"  resultType="java.lang.Integer">
+		select Count(*)
+		from product
+	</select>
+	
+	<!-- 회원 페이징을 위한 현재 블록에서 가져올 데이터 가져오기 --> 
+	<select id="getMemberPagingData"  resultType="com.syu.anyshop.login.LoginInfo">
+		select * 
+		from member
+		order by id desc
+		limit #{pageNum}, #{contentNum}
+	</select>
+	 
+	 
 	 
 	 
 	 	 

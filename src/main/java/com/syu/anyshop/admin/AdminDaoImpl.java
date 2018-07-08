@@ -2,6 +2,7 @@ package com.syu.anyshop.admin;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -294,6 +295,53 @@ public class AdminDaoImpl implements AdminDao{
 	public List<Payment> allExcel() {
 		
 		return sqlSession.selectList("admin.allExcel");
+	}
+
+	@Override
+	public int totalPagingCount() {
+		
+		return sqlSession.selectOne("admin.totalPagingCount");
+	}
+
+	@Override
+	public List<ProductInfo> getProductPagingData(int getPageNum, int contentNum) {
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		map.put("pageNum", getPageNum);
+		map.put("contentNum", contentNum);
+		
+		return sqlSession.selectList("admin.getProductPagingData", map);
+	}
+
+	@Override
+	public List<LoginInfo> getMemberPagingData(int getPageNum, int contentNum) {
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		map.put("pageNum", getPageNum);
+		map.put("contentNum", contentNum);
+		
+		return sqlSession.selectList("admin.getMemberPagingData", map);
+		
+		
+	}
+
+	@Override
+	public int totalReviewStatistics() {
+		
+		return sqlSession.selectOne("admin.totalReviewStatistics");
+	}
+
+	@Override
+	public List<ReviewInfo> getReviewStatisticsPagingData(int getPageNum, int contentNum) {
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		map.put("pageNum", getPageNum);
+		map.put("contentNum", contentNum);
+		
+		return sqlSession.selectList("admin.getReviewStatisticsPagingData", map);
 	}
 
 

@@ -288,6 +288,36 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.allExcel();
 	}
 
+	@Override
+	public int totalPagingCount() {
+		
+		return adminDao.totalPagingCount();
+	}
+
+	@Override
+	public List<ProductInfo> getProductPagingData(int getPageNum, int contentNum) {
+		
+		return adminDao.getProductPagingData(getPageNum, contentNum);
+	}
+
+	@Override
+	public List<LoginInfo> getMemberPagingData(int getPageNum, int contentNum) {
+		
+		return adminDao.getMemberPagingData(getPageNum, contentNum);
+	}
+
+	@Override
+	public int totalReviewStatistics() {
+		
+		return adminDao.totalReviewStatistics();
+	}
+
+	@Override
+	public List<ReviewInfo> getReviewStatisticsPagingData(int getPageNum, int contentNum) {
+		
+		return adminDao.getReviewStatisticsPagingData(getPageNum, contentNum);
+	}
+
 
 
 }
