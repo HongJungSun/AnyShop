@@ -13,14 +13,25 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->		
 	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<!-- 커넥션 풀 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<!-- local -->
  		<property name="url" value="jdbc:mysql://127.0.0.1:3306/anyshopdb?useUnicode=true&amp;characterEncoding=utf8"></property>
  		<property name="username" value="root"></property> 
  		<property name="password" value="apmsetup"></property> 
+ 		<property name="maxActive" value="30"></property> 
+ 		<property name="maxIdle" value="10"></property> 
+ 		<property name="maxWait" value="1000"></property>
+ 		<property name="defaultAutoCommit" value="true"></property> 
+ 		
+ 		<!-- 기본 db  -->
+ 		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+ 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/anyshopdb?useUnicode=true&amp;characterEncoding=utf8"></property>
+ 		<property name="username" value="root"></property> 
+ 		<property name="password" value="apmsetup"></property> --> 
 		
-		<!-- aws -->
+		<!-- aws db --> 
 		<!-- <property name="url" value="jdbc:mysql://mydb.cdcenlvdggt9.us-east-2.rds.amazonaws.com:3306/anyshopdb?useUnicode=true&amp;characterEncoding=utf8"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="apmsetupup"></property> -->

@@ -1,5 +1,8 @@
 package com.syu.anyshop.questionBoard;
 
+import lombok.Data;
+
+@Data
 public class Paging {
 	
 		private String keyword;
@@ -35,126 +38,6 @@ public class Paging {
 	        rowEnd = rowStart + rowCount -1;
 	    } 			    	
 
-	    public String getKeyword() {
-			return keyword;
-		}
-
-		public void setKeyword(String keyword) {
-			this.keyword = keyword;
-		}
-		
-		public String getSearchBoard() {
-			return searchBoard;
-		}
-
-		public void setSearchBoard(String searchBoard) {
-			this.searchBoard = searchBoard;
-		}
-
-		public int getRowCount() {
-			return rowCount;
-		}	    
-
-
-		public void setRowCount(int rowCount) {
-			this.rowCount = rowCount;
-		}
-
-
-		public int getRowStart() {
-			return rowStart;
-		}
-
-
-
-		public void setRowStart(int rowStart) {
-			this.rowStart = rowStart;
-		}
-
-
-
-		public int getRowEnd() {
-			return rowEnd;
-		}
-
-
-
-		public void setRowEnd(int rowEnd) {
-			this.rowEnd = rowEnd;
-		}
-
-
-
-		public int getTotalPage() {
-			return totalPage;
-		}
-
-
-
-		public void setTotalPage(int totalPage) {
-			this.totalPage = totalPage;
-		}
-
-
-
-		public int getTotalRow() {
-			return totalRow;
-		}
-
-
-
-		public void setTotalRow(int totalRow) {
-			this.totalRow = totalRow;
-		}
-
-
-
-		public int getPage() {
-			return page;
-		}
-
-
-
-		public void setPage(int page) {
-			this.page = page;
-		}
-
-
-
-		public int getPageStart() {
-			return pageStart;
-		}
-
-
-
-		public void setPageStart(int pageStart) {
-			this.pageStart = pageStart;
-		}
-
-
-
-		public int getPageEnd() {
-			return pageEnd;
-		}
-
-
-
-		public void setPageEnd(int pageEnd) {
-			this.pageEnd = pageEnd;
-		}
-
-
-		@Override
-		public String toString() {
-			return "Paging [keyword=" + keyword + ", searchBoard=" + searchBoard + ", rowCount=" + rowCount
-					+ ", rowStart=" + rowStart + ", rowEnd=" + rowEnd + ", totalPage=" + totalPage + ", totalRow="
-					+ totalRow + ", page=" + page + ", pageStart=" + pageStart + ", pageEnd=" + pageEnd + "]";
-		}
-
-
-
-
-	    
 
 
 }
