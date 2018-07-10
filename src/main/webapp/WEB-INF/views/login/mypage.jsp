@@ -15,7 +15,7 @@
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
                 <h4>내정보</h4>
-                  <form action="update_info.do" name="userInfo" class="aa-login-form">    
+                  <form action="update_info.do" name="userInfo" class="aa-login-form" method="post">    
                  	<input type="hidden" name="pw" value="${sessionScope.loginInfo.pw}">
                  	<input type="hidden" name="gender" value="${sessionScope.loginInfo.gender}">       
                     <input type="hidden" name="id" value="${sessionScope.loginInfo.id}">
@@ -48,18 +48,6 @@
 
 	</script>
 
-              <div class="col-md-6">
-                <div class="aa-myaccount-register">                 
-                 <h4>오늘 본 내 상품(*)</h4>
-                 <form action="" class="aa-login-form">
-                    <label for="">Username or Email address<span>*</span></label>
-                    <input type="text" placeholder="Username or email">
-                    <label for="">Password<span>*</span></label>
-                    <input type="password" placeholder="Password">
-                    <button type="submit" class="aa-browse-btn">Register</button>                    
-                  </form>
-                </div>
-              </div>
             </div>          
          </div>
        </div>

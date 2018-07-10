@@ -62,7 +62,6 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public void addProduct(ProductInfo productInfo) {
 		
-		System.out.println("찍은값: " + productInfo.toString());
 		sqlSession.insert("admin.addProduct", productInfo);
 		
 		return ;

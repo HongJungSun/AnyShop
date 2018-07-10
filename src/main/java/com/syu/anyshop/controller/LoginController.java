@@ -150,16 +150,27 @@ public class LoginController {
 	public String mypage() {
 		logger.info("Welcome LoginController mypage! "+ new Date());
 		
+		
+		
 		return "login/mypage";
 	}
 	
-	//내정보 수정
+	//내정보 수정 하기전 보안 체크
 	@RequestMapping(value = "update_info.do")
 	public String update_info(LoginInfo loginInfo) {
 		logger.info("Welcome LoginController update_info! "+ new Date());
 		
+		return "login/updateMyInfoCheck";
+	}
+	
+	// 내 정보 수정 페이지
+	@RequestMapping(value = "update_infoCheck.do")
+	public String update_infoCheck(LoginInfo loginInfo) {
+		logger.info("Welcome LoginController update_infoCheck! "+ new Date());
+		
 		return "login/updateMyInfo";
 	}
+	
 	
 	//내정보 수정 결과
 	@RequestMapping(value = "updateAfter.do")
@@ -303,7 +314,6 @@ public class LoginController {
 		return "product/seasonProduct";
 
 	}		
-	
 	
 	
 	

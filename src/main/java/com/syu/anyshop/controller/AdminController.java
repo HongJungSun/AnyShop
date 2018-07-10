@@ -313,7 +313,7 @@ public class AdminController {
 		@RequestMapping(value = "editProductCommit.do")
 		public String editProductCommit(Model model, @ModelAttribute ProductInfo productInfo) {
 			logger.info("Welcome adminController editProductCommit! "+ new Date());
-						
+									
 			adminService.editProductCommit(productInfo);				
 						
 			return "forward:/selectProductList.do";
@@ -321,10 +321,13 @@ public class AdminController {
 				
 		//상품 등록(관리자 권한)
 		@RequestMapping(value = "addProductCommit.do")
-		public String addProductCommit(Model model, ProductInfo productInfo) {
+		public String addProductCommit(Model model,  ProductInfo productInfo) {
 			logger.info("Welcome adminController addProductCommit! "+ new Date());
-									
-			adminService.addProduct(productInfo);
+			
+				// ,로 들어오는값 제거
+				productInfo.setProduct_detail(productInfo.getProduct_detail().replaceAll(",",""));
+
+				adminService.addProduct(productInfo);			
 								
 			return "redirect:/selectProductList.do";
 

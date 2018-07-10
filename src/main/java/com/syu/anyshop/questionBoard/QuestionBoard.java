@@ -14,5 +14,16 @@ public class QuestionBoard {
 	  private String regi_date;
 	  private String regi_id;
 	  
+	  
+	  // 스크립트문 실행 방지
+	    public String getContents() {
+	        return this.contents.replaceAll("(?i)<script", "&lt;script");
+	    }
+	    
+	    // 스크립트문 실행 방지
+	    public String getTitle() {
+	        return this.title.replaceAll("(?i)<script", "&lt;script");
+	    }
+
 	
 }

@@ -635,6 +635,7 @@
              	 <!-- 상품 문의 -->
 	                <div class="tab-pane fade active in" id="tabView3" style="position:relative; text-align:center;">
 	                  	<h2>상품 문의</h2>
+	                  	<h3> 제품에 대한 궁금한 부분을 적어주세요.</h3>
 	                  	<!-- 삼품문의 게시판 검색 -->
 	                  		<form action="searchBoard.do" method="post" style="margin-left:580px;">
 	                  			<input type="hidden" name="product_id" value="${productInfo.product_id}">
@@ -652,7 +653,7 @@
 	                  	<!-- /삼품문의 게시판 검색 -->	
 	                  	
 	                  	<!-- 상품 문의 게시판 -->
-	                  	<div id="_page">                  	
+	                  	<div>                  	
 							 <table style="border:1px solid #ccc; margin-left: auto; margin-right: auto; width: 1000px;">
 							    <colgroup>
 							        <col width="10%"/>

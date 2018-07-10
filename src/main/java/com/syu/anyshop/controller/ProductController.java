@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.syu.anyshop.paging.Page;
 import com.syu.anyshop.product.ProductInfo;
 import com.syu.anyshop.product.ProductService;
 import com.syu.anyshop.questionBoard.Paging;
@@ -44,13 +45,42 @@ public class ProductController {
        
 	// 상품 전체 목록 (대분류)
 	@RequestMapping(value = "product_kindsAllList.do")
-	public String productAllList(Model model, @RequestParam String product_kinds) {
+	public String productAllList(Model model, @RequestParam String product_kinds, Page page, String pageNum1, String contentNum1) {
 		logger.info("Welcome productController product_kindsAllList! " + new Date());
 		
-		List<ProductInfo> list= new ArrayList<ProductInfo>();
-		list= productService.productAllList(product_kinds);		
-	
-		model.addAttribute("productList",list);
+		int pageNum =0;
+		int contentNum= 0;
+		
+		if(pageNum1 == null) {
+			pageNum=1;
+		} else {
+			pageNum = Integer.parseInt(pageNum1);
+		}
+		if(contentNum1 == null) {
+			contentNum = 12;
+		} else {
+			contentNum = Integer.parseInt(contentNum1);
+		}			
+		
+		page.setTotalCount(productService.totalProduct(product_kinds));	// 전체 상품수
+		page.setPageNum(pageNum-1);                                	// 현재 페이지를 페이지 객체에 지정, -1을 해야 쿼리에서 사용가능 (limit은 0부터기때문에)
+		page.setContentNum(contentNum);                             // 한페이지에 몇개씩 게시글을 보여줄지 설정
+		page.setCurrentBlock(pageNum);                              // 현제 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정
+		page.setLastBlock(page.getTotalCount());					// 마지막 블록 번호를 전체 게시글 수를 통해서  정한다.
+		
+		
+		page.prevNext(pageNum);                                         // 현재 페이지 번호로 화살표를 나타낼지 정한다
+		page.setStartPage(page.getCurrentBlock());                      // 시작 페이지를 페이지 블록 번호로 정한다.
+		page.setEndPage(page.getLastBlock(), page.getCurrentBlock());   // 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+		
+		
+		List<ProductInfo> list = new ArrayList<ProductInfo>();
+		list = productService.getProductPagingData(product_kinds, page.getPageNum()*12, page.getContentNum());
+		
+		logger.info(list.toString());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);
 		model.addAttribute("product_kinds", list.get(0).getProduct_kinds());
 		
 		return "product/productAllList";
@@ -59,18 +89,46 @@ public class ProductController {
 	
 	// 상품 전체 목록 (소분류)
 		@RequestMapping(value = "productDetailAllList.do")
-		public String productDetailAllList(Model model, @RequestParam String product_kinds, @RequestParam String product_detail) {
-			logger.info("Welcome productController product_kindsAllList! " + new Date());
+		public String productDetailAllList(Model model, @RequestParam String product_kinds, @RequestParam String product_detail, 
+												Page page, String pageNum1, String contentNum1) {
+			logger.info("Welcome productController product_kindsAllListDetail! " + new Date());
 			
-			List<ProductInfo> list= new ArrayList<ProductInfo>();
+			int pageNum =0;
+			int contentNum= 0;
 			
-			list= productService.productDetailAllList(product_kinds, product_detail);
+			if(pageNum1 == null) {
+				pageNum=1;
+			} else {
+				pageNum = Integer.parseInt(pageNum1);
+			}
+			if(contentNum1 == null) {
+				contentNum = 12;
+			} else {
+				contentNum = Integer.parseInt(contentNum1);
+			}			
 			
-			model.addAttribute("productList",list);
-			model.addAttribute("product_kinds", product_kinds);
-			model.addAttribute("product_detail", product_detail);
+			page.setTotalCount(productService.totalProductDetail(product_kinds, product_detail));	// 전체 상품수
+			page.setPageNum(pageNum-1);                                	// 현재 페이지를 페이지 객체에 지정, -1을 해야 쿼리에서 사용가능 (limit은 0부터기때문에)
+			page.setContentNum(contentNum);                             // 한페이지에 몇개씩 게시글을 보여줄지 설정
+			page.setCurrentBlock(pageNum);                              // 현제 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정
+			page.setLastBlock(page.getTotalCount());					// 마지막 블록 번호를 전체 게시글 수를 통해서  정한다.
 			
-			return "product/productAllList";
+			
+			page.prevNext(pageNum);                                         // 현재 페이지 번호로 화살표를 나타낼지 정한다
+			page.setStartPage(page.getCurrentBlock());                      // 시작 페이지를 페이지 블록 번호로 정한다.
+			page.setEndPage(page.getLastBlock(), page.getCurrentBlock());   // 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+			
+			
+			List<ProductInfo> list = new ArrayList<ProductInfo>();
+			list = productService.getProductDetailPagingData(product_kinds, product_detail, page.getPageNum()*12, page.getContentNum());
+			
+			
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("product_kinds", list.get(0).getProduct_kinds());
+			model.addAttribute("product_detail", list.get(0).getProduct_detail());
+			
+			return "product/productAllListDetail";
 
 		}	
 		

@@ -3,9 +3,94 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
 
 <script>
+
+//상품 대분류 클릭시 소분류 보여주기
+$(document).ready(function(){
+	$('#_product_kinds').on("change", function(){
+		
+		var obj = $(this).val();
+		
+	    if(obj == "T-shirts") {
+	    	
+	    	$('#_size2').css("display", "");
+	    	$('#_shoes2').css("display", "none");
+	        $('#_T-shirts').css("display", "");
+	        $('#_outerwear').css("display", "none");
+	        $('#_shirts').css("display", "none");
+	        $('#_pants').css("display", "none");
+	        $('#_shoes').css("display", "none");
+	        $('#_training').css("display", "none");
+
+	    } else if (obj == "outerwear" ){
+	    	
+	    	$('#_size2').css("display", "");
+	    	$('#_shoes2').css("display", "none");
+	    	  $('#_T-shirts').css("display", "none");
+	          $('#_outerwear').css("display", "");
+	          $('#_shirts').css("display", "none");
+	          $('#_pants').css("display", "none");
+	          $('#_shoes').css("display", "none");
+	          $('#_training').css("display", "none");
+
+	     } else if (obj == "shirts" ){
+	    	 
+	    	 $('#_size2').css("display", "");
+	    	 $('#_shoes2').css("display", "none");
+	    	  $('#_T-shirts').css("display", "");
+	          $('#_outerwear').css("display", "none");
+	          $('#_shirts').css("display", "");
+	          $('#_pants').css("display", "none");
+	          $('#_shoes').css("display", "none");
+	          $('#_training').css("display", "none");
+
+	      } else if (obj == "pants" ){
+	    	  
+	    	  $('#_size2').css("display", "");
+	    	  $('#_shoes2').css("display", "none");
+	    	  $('#_T-shirts').css("display", "");
+	          $('#_outerwear').css("display", "none");
+	          $('#_shirts').css("display", "none");
+	          $('#_pants').css("display", "");
+	          $('#_shoes').css("display", "none");
+	          $('#_training').css("display", "none");
+
+	       } else if (obj == "shoes" ){
+	    	   
+	    	   $('#_size2').css("display", "none");
+	    	   $('#_shoes2').css("display", "");
+	    	   $('#_T-shirts').css("display", "");
+	           $('#_outerwear').css("display", "none");
+	           $('#_shirts').css("display", "none");
+	           $('#_pants').css("display", "none");
+	           $('#_shoes').css("display", "");
+	           $('#_training').css("display", "none");
+
+	        } else {
+	        	
+	        	$('#_size2').css("display", "");
+	        	$('#_shoes2').css("display", "none");
+	        	  $('#_T-shirts').css("display", "");
+	              $('#_outerwear').css("display", "none");
+	              $('#_shirts').css("display", "none");
+	              $('#_pants').css("display", "none");
+	              $('#_shoes').css("display", "none");
+	              $('#_training').css("display", "");
+
+	         }
+
+	});
+	
+});
+
+
 
 // 상품 등록시 상품명 중복검사
 function checkProduct() {
@@ -39,6 +124,7 @@ function checkProduct() {
 	} else if ( $('#_product_price').val() <= 0 ) {
 		alert('상품 가격은 0원 이하로 등록 하실 수 없습니다.');
 		return false;
+		
 	} else {
 			
 	    $.ajax ({
@@ -114,28 +200,71 @@ function readURL(input, index) {
             <td>상품 대분류 </td>
             <td>
             	<select name="product_kinds" id="_product_kinds">
-            		<option value="man"> 남자 </option>
-            		<option value="women"> 여자 </option>
-            		<option value="kids"> 어린이 </option>
-            		<option value="sports"> 스포츠 </option>
-            		<option value="spring"> 봄 코디</option>
-            		<option value="summer"> 여름 코디</option>
-            		<option value="autumn"> 가을 코디</option>
-            		<option value="winter"> 겨울코디 </option>
+            		<option value="">-- 대분류를 선택해주세요.--</option>
+            		<option value="T-shirts"> T-shirts</option>
+            		<option value="outerwear"> 아우터 </option>
+            		<option value="shirts"> 셔츠 </option>
+            		<option value="pants"> 팬츠 </option>
+            		<option value="shoes"> 신발 </option>
+            		<option value="training"> 트레이닝 </option>
             	</select>
             </td>
         </tr>
         <tr>
             <td>상품 소분류</td>
             <td>
-            	<select name="product_detail" id="_product_detail">
+            	<select name="product_detail" id="_T-shirts" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="shortSleeveTee"> 반팔&7부티 </option>
+            		<option value="vest"> 조끼&나시티 </option>
+            		<option value="longSleeveTee"> 긴팔티 </option>
+            		<option value="manToMan"> 맨투맨 </option>
+            		<option value="hoodT-shirt"> 후드티 </option>
+            	</select>
+
+            	<select name="product_detail" id="_outerwear" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="jacket"> 자켓 </option>
+            		<option value="cardigan"> 가디건 </option>
+            		<option value="padding"> 패딩 </option>
+            		<option value="zipUp"> 집업 </option>
+            	</select>
+
+            	<select name="product_detail" id="_shirts" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="basicShirts"> 베이직&데님 </option>
+            		<option value="shortShirts"> 반팔&7부 </option>
+            		<option value="checkShirts"> 체크&패턴 </option>
+            		<option value="longShirts"> 긴팔 </option>
+            	</select>
+
+            	<select name="product_detail" id="_pants" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
             		<option value="shoes"> 신발 </option>
             		<option value="top"> 상의 </option>
             		<option value="bottom"> 하의 </option>
             		<option value="outerwear"> 아우터 </option>
             		<option value="skirt"> 치마 </option>
             	</select>
-            </td>
+
+            	<select name="product_detail" id="_shoes" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="sandal"> 샌들&쪼리 </option>
+            		<option value="runningShoes"> 운동화 </option>
+            		<option value="slimShoes"> 슬립온 </option>
+            		<option value="shoesShoes"> 구두 </option>
+            		<option value="walker"> 워커 </option>
+            	</select>
+
+            	<select name="product_detail" id="training" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="set"> 세트 </option>
+            		<option value="top"> 상의 </option>
+            		<option value="bottom"> 하의 </option>
+
+            	</select>
+            </td>            
+                     
         </tr>
         <tr>
             <td>상품명</td>
@@ -156,14 +285,20 @@ function readURL(input, index) {
             	<input type="checkbox" name="product_color" value="Indigo"> 남색
             </td>
         </tr>
-        <tr>
-            <td>사이즈</td>
+        <tr style="display:none;" id="_size2">
+            <td> 사이즈</td>
  
             <td>           
 	            <input type="checkbox" name="product_size" value="s"> small
 	            <input type="checkbox" name="product_size" value="m"> middle
 	            <input type="checkbox" name="product_size" value="l"> large
 	            <input type="checkbox" name="product_size" value="xl"> X-large
+	            <input type="checkbox" name="product_size" value="free"> Free         	          	
+            </td>
+        </tr>
+        <tr style="display:none;" id="_shoes2">
+            <td> 신발 사이즈</td>
+            <td>           
 	            <input type="checkbox" name="product_size" value="220mm"> 220mm
 	            <input type="checkbox" name="product_size" value="230mm"> 230mm
 	            <input type="checkbox" name="product_size" value="240mm"> 240mm

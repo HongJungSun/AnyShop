@@ -51,6 +51,31 @@ public class ProductServiceImpl implements ProductService{
 		
 		return productDao.selectNameProductInfo(searchBox);
 	}
+
+	@Override
+	public int totalProduct(String product_kinds) {
+		
+		return productDao.totalProduct(product_kinds);
+	}
+
+	@Override
+	public List<ProductInfo> getProductPagingData(String product_kinds, int getPageNum, int contentNum) {
+		
+		return productDao.getProductPagingData(product_kinds, getPageNum, contentNum);
+	}
+
+	@Override
+	public int totalProductDetail(String product_kinds, String product_detail) {
+		
+		return productDao.totalProductDetail(product_kinds, product_detail);
+	}
+
+	@Override
+	public List<ProductInfo> getProductDetailPagingData(String product_kinds, String product_detail, int getPageNum,
+			int contentNum) {
+		
+		return productDao.getProductDetailPagingData(product_kinds, product_detail, getPageNum, contentNum);
+	}
 	
 
 }

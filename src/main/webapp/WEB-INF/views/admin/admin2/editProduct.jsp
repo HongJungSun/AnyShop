@@ -10,11 +10,138 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script>
+
+$(document).ready(function(){
+	
+       //기존 체크된 값 가져오기
+       $('input:hidden[name="product_color1"]').each(function(index, item){   	  
+    	   
+    	   if($(this).val() == "red") {
+    		   $('#_red').prop("checked", true);
+    	   } 
+    	   
+    	   else if($(this).val() == "green") {
+    		   $('#_green').prop("checked", true);
+    		   
+    	   } else if($(this).val() == "blue") {
+    		   $('#_blue').prop("checked", true);
+    	   }
+    	   
+    	   else if($(this).val() == "black") {
+    		   $('#_black').prop("checked", true);
+    	   }
+    	   
+    	   else if($(this).val() == "white") {
+    		   $('#_white').prop("checked", true);
+    	   }
+    	   
+    	   else if($(this).val() == "yellow") {
+    		   $('#_yellow').prop("checked", true);
+    	   }
+    	   
+    	   else if($(this).val() == "brown") {
+    		   $('#_brown').prop("checked", true);
+    	   }
+    	   
+    	   else if($(this).val() == "purple") {
+    		   $('#_purple').prop("checked", true);
+    	   }
+    	   
+    	   else if($(this).val() == "pink") {
+    		   $('#_pink').prop("checked", true);
+    	   }
+    	   
+    	   else {
+    		   $('#_Indigo').prop("checked", true);
+    	   }	   
+       });
+	
+	
+	
+	
+     //상품 대분류 클릭시 소분류 보여주기
+	$('#_product_kinds').on("change", function(){
+		
+		var obj = $(this).val();
+		
+	    if(obj == "T-shirts") {
+	    	
+	    	$('#_size2').css("display", "");
+	    	$('#_shoes2').css("display", "none");
+	        $('#_T-shirts').css("display", "");
+	        $('#_outerwear').css("display", "none");
+	        $('#_shirts').css("display", "none");
+	        $('#_pants').css("display", "none");
+	        $('#_shoes').css("display", "none");
+	        $('#_training').css("display", "none");
+
+	    } else if (obj == "outerwear" ){
+	    	
+	    	$('#_size2').css("display", "");
+	    	$('#_shoes2').css("display", "none");
+	    	  $('#_T-shirts').css("display", "none");
+	          $('#_outerwear').css("display", "");
+	          $('#_shirts').css("display", "none");
+	          $('#_pants').css("display", "none");
+	          $('#_shoes').css("display", "none");
+	          $('#_training').css("display", "none");
+
+	     } else if (obj == "shirts" ){
+	    	 
+	    	 $('#_size2').css("display", "");
+	    	 $('#_shoes2').css("display", "none");
+	    	  $('#_T-shirts').css("display", "");
+	          $('#_outerwear').css("display", "none");
+	          $('#_shirts').css("display", "");
+	          $('#_pants').css("display", "none");
+	          $('#_shoes').css("display", "none");
+	          $('#_training').css("display", "none");
+
+	      } else if (obj == "pants" ){
+	    	  
+	    	  $('#_size2').css("display", "");
+	    	  $('#_shoes2').css("display", "none");
+	    	  $('#_T-shirts').css("display", "");
+	          $('#_outerwear').css("display", "none");
+	          $('#_shirts').css("display", "none");
+	          $('#_pants').css("display", "");
+	          $('#_shoes').css("display", "none");
+	          $('#_training').css("display", "none");
+
+	       } else if (obj == "shoes" ){
+	    	   
+	    	   $('#_size2').css("display", "none");
+	    	   $('#_shoes2').css("display", "");
+	    	   $('#_T-shirts').css("display", "");
+	           $('#_outerwear').css("display", "none");
+	           $('#_shirts').css("display", "none");
+	           $('#_pants').css("display", "none");
+	           $('#_shoes').css("display", "");
+	           $('#_training').css("display", "none");
+
+	        } else {
+	        	
+	        	$('#_size2').css("display", "");
+	        	$('#_shoes2').css("display", "none");
+	        	  $('#_T-shirts').css("display", "");
+	              $('#_outerwear').css("display", "none");
+	              $('#_shirts').css("display", "none");
+	              $('#_pants').css("display", "none");
+	              $('#_shoes').css("display", "none");
+	              $('#_training').css("display", "");
+
+	         }
+
+	});
+	
+});
+
+// 편집 submit
 function checkEditForm() {
+	
 		var colorResult;
 		var sizeResult;
-	
-	
+			
 	 $('input:checkbox[name="product_color"]').each(function() {
 	      if(this.checked == true){    //checked 처리된 항목의 값
 	    	  colorResult= true;
@@ -33,6 +160,9 @@ function checkEditForm() {
 	      }
 	 });
 
+	 
+		
+		
         // 상품 수정 폼 유효성 검사
         if($('#_productImg0').val() == null) {
         	alert('상품 대표이미지를 선택하세요.');
@@ -43,7 +173,7 @@ function checkEditForm() {
         } else if($('#_product_kinds').val() == null) {
         	alert('상품 대분류를 선택하세요.');
         	return false;
-        } else if($('#_product_detail').val() == null) {
+        } else if($('#_T-shirts').val() == "" && $('#_outerwear').val() == "" && $('#_shirts').val() == "" && $('#_pants').val() == "" && $('#_shoes').val() == "" && $('#_training').val() == "") {
         	alert('상품 소분류를 선택하세요.');
         	return false;
         } else if($('#_product_name').val() == null) {
@@ -88,75 +218,126 @@ function back() {
 
 </script>
 
-<script>
-	//파일 값 가져오기
-	$(document).ready(function(){
-		var id= $('#_product_id').val();
-		
-        $.ajax ({
-            type: 'POST',
-            url: 'getFile.do',
-            data: {product_id:id},
-            success: function(msg) {
-
-            }
-         });
-        
-        
-	});
-
-
-
-</script>
-
 
 <h2>상품 정보 수정</h2>
 <form id="_editForm" name="editForm" method="post" action="editProductCommit.do" onsubmit= "return checkEditForm()">
-	<input type="hidden" name="product_id" id="_product_id" value="${productInfo.product_id}">	
+	<input type="hidden" name="product_id" id="_product_id" value="${productInfo.product_id}">
+	<c:forEach items="${productInfo.product_color }" var="product_color">
+		<input type="hidden" name="product_color1" id="_product_color1" value="${product_color}">		
+	</c:forEach>
+	
     <table class="table table-striped projects">
         <tr>
             <td>상품 이미지</td>
             <td>
-                <img src="resources/product/${productInfo.product_img}" height="250px" width="260px" id="_productImg0">
+                <img src="resources/product/default.gif" height="250px" width="260px" id="_productImg0">
                 <br>
                 <input type="file" id="_productPhoto0" name="product_img" onchange="readURL(this,0);">
             </td>
         </tr>
         <tr>
         	<td> 키워드 </td>
-        	<td> 
+        	<td>
         		<select name="keyword" id="_keyword">
-            		<option value="spring"> 봄 </option>
-            		<option value="summer"> 여름 </option>
-            		<option value="autumn"> 가을 </option>
-            		<option value="winter"> 겨을 </option>
-
+        			<c:if test="${productInfo.keyword eq 'spring'}">
+            			<option value="spring" selected> 봄 </option>
+            		</c:if>
+            		<c:if test="${productInfo.keyword ne 'spring'}">
+            			<option value="spring"> 봄 </option>
+            		</c:if>
+            		
+            		<c:if test="${productInfo.keyword eq 'spring'}">
+            			<option value="spring" selected> 여름 </option>
+            		</c:if>
+            		<c:if test="${productInfo.keyword ne 'spring'}">
+            			<option value="spring"> 여름 </option>
+            		</c:if>
+            		
+            		<c:if test="${productInfo.keyword eq 'autumn'}">
+            			<option value="autumn" selected> 가을 </option>
+            		</c:if>
+            		<c:if test="${productInfo.keyword ne 'autumn'}">
+            			<option value="autumn"> 가을 </option>
+            		</c:if>
+            		
+            		<c:if test="${productInfo.keyword eq 'winter'}">
+            			<option value="winter" selected> 겨울 </option>
+            		</c:if>
+            		<c:if test="${productInfo.keyword ne 'winter'}">
+            			<option value="winter"> 겨울 </option>
+            		</c:if>
             	</select>
         	</td>
         </tr>
-         <tr>
-            <td>상품 대분류</td>
+        <tr>
+            <td>상품 대분류 </td>
             <td>
             	<select name="product_kinds" id="_product_kinds">
-            		<option value="man"> 남자 </option>
-            		<option value="women"> 여자 </option>
-            		<option value="kids"> 어린이 </option>
-            		<option value="sports"> 스포츠 </option>
+            		<option value="">-- 대분류를 선택해주세요.--</option>
+            		<option value="T-shirts"> T-shirts</option>
+            		<option value="outerwear"> 아우터 </option>
+            		<option value="shirts"> 셔츠 </option>
+            		<option value="pants"> 팬츠 </option>
+            		<option value="shoes"> 신발 </option>
+            		<option value="training"> 트레이닝 </option>
             	</select>
             </td>
         </tr>
-         <tr>
+        <tr>
             <td>상품 소분류</td>
             <td>
-            	<select name="product_detail" id="_product_detail">
+            	<select name="product_detail" id="_T-shirts" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="shortSleeveTee"> 반팔&7부티 </option>
+            		<option value="vest"> 조끼&나시티 </option>
+            		<option value="longSleeveTee"> 긴팔티 </option>
+            		<option value="manToMan"> 맨투맨 </option>
+            		<option value="hoodT-shirt"> 후드티 </option>
+            	</select>
+
+            	<select name="product_detail" id="_outerwear" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="jacket"> 자켓 </option>
+            		<option value="cardigan"> 가디건 </option>
+            		<option value="padding"> 패딩 </option>
+            		<option value="zipUp"> 집업 </option>
+            	</select>
+
+            	<select name="product_detail" id="_shirts" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="basicShirts"> 베이직&데님 </option>
+            		<option value="shortShirts"> 반팔&7부 </option>
+            		<option value="checkShirts"> 체크&패턴 </option>
+            		<option value="longShirts"> 긴팔 </option>
+            	</select>
+
+            	<select name="product_detail" id="_pants" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
             		<option value="shoes"> 신발 </option>
             		<option value="top"> 상의 </option>
             		<option value="bottom"> 하의 </option>
             		<option value="outerwear"> 아우터 </option>
             		<option value="skirt"> 치마 </option>
-         		
             	</select>
-            </td>
+
+            	<select name="product_detail" id="_shoes" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="sandal"> 샌들&쪼리 </option>
+            		<option value="runningShoes"> 운동화 </option>
+            		<option value="slimShoes"> 슬립온 </option>
+            		<option value="shoesShoes"> 구두 </option>
+            		<option value="walker"> 워커 </option>
+            	</select>
+
+            	<select name="product_detail" id="training" style="display:none ;">
+            		<option value=""> --소분류를 선택해주세요.--</option>
+            		<option value="set"> 세트 </option>
+            		<option value="top"> 상의 </option>
+            		<option value="bottom"> 하의 </option>
+
+            	</select>
+            </td>            
+                     
         </tr>
         <tr>
             <td>상품명</td>
@@ -165,30 +346,32 @@ function back() {
         <tr>
             <td>컬러</td>
             <td>
-            	<input type="checkbox" name="product_color" value="red"> 빨강
-            	<input type="checkbox" name="product_color" value="green"> 초록
-            	<input type="checkbox" name="product_color" value="blue"> 파랑
-            	<input type="checkbox" name="product_color" value="black"> 검정
-            	<input type="checkbox" name="product_color" value="white"> 화이트
-            	<input type="checkbox" name="product_color" value="yellow"> 노랑
-            	<input type="checkbox" name="product_color" value="brown"> 갈색
-            	<input type="checkbox" name="product_color" value="purple"> 보라
-            	<input type="checkbox" name="product_color" value="pink"> 분홍
-            	<input type="checkbox" name="product_color" value="Indigo"> 남색
+            	<input type="checkbox" name="product_color" value="red" id="_red"> 빨강
+            	<input type="checkbox" name="product_color" value="green" id="_green"> 초록
+            	<input type="checkbox" name="product_color" value="blue" id="_blue"> 파랑
+            	<input type="checkbox" name="product_color" value="black" id="_black"> 검정
+            	<input type="checkbox" name="product_color" value="white" id="_white"> 화이트
+            	<input type="checkbox" name="product_color" value="yellow" id="_yellow"> 노랑
+            	<input type="checkbox" name="product_color" value="brown" id="_brown"> 갈색
+            	<input type="checkbox" name="product_color" value="purple" id="_purple"> 보라
+            	<input type="checkbox" name="product_color" value="pink" id="_pink"> 분홍
+            	<input type="checkbox" name="product_color" value="Indigo" id="_Indigo"> 남색
             </td>
         </tr>
-         <tr>
-            <td>사이즈</td>
+        <tr style="display:none;" id="_size2">
+            <td> 사이즈</td>
+ 
             <td>           
 	            <input type="checkbox" name="product_size" value="s"> small
 	            <input type="checkbox" name="product_size" value="m"> middle
 	            <input type="checkbox" name="product_size" value="l"> large
 	            <input type="checkbox" name="product_size" value="xl"> X-large
-	            <input type="checkbox" name="product_size" value="free"> Free
-	            <input type="checkbox" name="product_size" value="220mm"> 180mm
-	            <input type="checkbox" name="product_size" value="220mm"> 190mm
-	            <input type="checkbox" name="product_size" value="220mm"> 200mm
-	            <input type="checkbox" name="product_size" value="220mm"> 210mm 
+	            <input type="checkbox" name="product_size" value="free"> Free         	          	
+            </td>
+        </tr>
+        <tr style="display:none;" id="_shoes2">
+            <td> 신발 사이즈</td>
+            <td>           
 	            <input type="checkbox" name="product_size" value="220mm"> 220mm
 	            <input type="checkbox" name="product_size" value="230mm"> 230mm
 	            <input type="checkbox" name="product_size" value="240mm"> 240mm
@@ -197,14 +380,14 @@ function back() {
 	            <input type="checkbox" name="product_size" value="270mm"> 270mm
 	            <input type="checkbox" name="product_size" value="280mm"> 280mm           	          	
             </td>
-        </tr>        
+        </tr>
         <tr>
             <td>가격</td>
             <td><input type="number" id="_product_price" name="product_price" value="${productInfo.product_price}">원</td>
         </tr>
         <tr>
             <td>상품소개</td>
-            <td><textarea id="_product_info" name="product_info" rows="10" cols="100">${productInfo.product_info}</textarea></td>
+            <td><textarea id="_product_info" name="product_info" rows="10" cols="100"> ${productInfo.product_info}</textarea></td>
         </tr>
      </table>
         

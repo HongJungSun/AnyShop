@@ -48,7 +48,7 @@ public class Page {
 	
 	
 	public void getStartPage(int currentBlock) {
-		// 5개씩 보여주기
+		// 5개씩 페이지 보여주기
 		this.startPage = (currentBlock * 5) - 4;
 	}
 	

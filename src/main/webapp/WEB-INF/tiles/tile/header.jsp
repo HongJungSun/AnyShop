@@ -188,42 +188,60 @@
             <!-- Left nav -->
             <ul class="nav navbar-nav">
               <li><a href="main.do">Home</a></li>
-              <li><a href="product_kindsAllList.do?product_kinds=man">남자 <span class="caret"></span></a>
+              <li><a href="product_kindsAllList.do?product_kinds=T-shirts"> 티셔츠 <span class="caret"></span></a>
                 <ul class="dropdown-menu">                
-                  <li><a href="productDetailAllList.do?product_kinds=man&product_detail=shoes">신발</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=man&product_detail=top">상의</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=man&product_detail=bottom">하의</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=man&product_detail=outerwear">아우터</a></li>                                                
+                  <li><a href="productDetailAllList.do?product_kinds=T-shirts&product_detail=shortSleeveTee">반팔&7부티</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=T-shirts&product_detail=vest">조끼&나시티</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=T-shirts&product_detail=longSleeveTee">긴팔티</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=T-shirts&product_detail=manToMan">맨투맨</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=T-shirts&product_detail=hoodT-shirt">후드티</a></li>                                                 
                 </ul>
               </li>
-              <li><a href="product_kindsAllList.do?product_kinds=women">여자 <span class="caret"></span></a>
+              <li><a href="product_kindsAllList.do?product_kinds=outerwear">아우터 <span class="caret"></span></a>
                 <ul class="dropdown-menu">  
-                  <li><a href="productDetailAllList.do?product_kinds=women&product_detail=shoes">신발</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=women&product_detail=top">상의</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=women&product_detail=bottom">하의</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=women&product_detail=skirt">치마</a></li> 
-                  <li><a href="productDetailAllList.do?product_kinds=women&product_detail=outerwear">아우터</a></li>                                                                  
+                  <li><a href="productDetailAllList.do?product_kinds=outerwear&product_detail=jacket">자켓</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=outerwear&product_detail=cardigan">가디건</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=outerwear&product_detail=padding">패딩</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=outerwear&product_detail=zipUp">집업</a></li>                                                              
                  </ul>
                </li>                   
 
-              <li><a href="product_kindsAllList.do?product_kinds=kids">어린이 <span class="caret"></span></a>
+              <li><a href="product_kindsAllList.do?product_kinds=shirts">셔츠 <span class="caret"></span></a>
                 <ul class="dropdown-menu">                
-                  <li><a href="productDetailAllList.do?product_kinds=kids&product_detail=shoes">신발</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=kids&product_detail=top">상의</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=kids&product_detail=bottom">하의</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=kids&product_detail=skirt">치마</a></li> 
-                  <li><a href="productDetailAllList.do?product_kinds=kids&product_detail=outerwear">아우터</a></li>                                                 
+                  <li><a href="productDetailAllList.do?product_kinds=shirts&product_detail=basicShirts">베이직&데님</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=shirts&product_detail=shortShirts">반팔&7부</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=shirts&product_detail=checkShirts">체크&패턴</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=shirts&product_detail=longShirts">긴팔</a></li>                                                 
                 </ul>
               </li>
               
-             <li><a href="product_kindsAllList.do?product_kinds=sports">운동 <span class="caret"></span></a>
+             <li><a href="product_kindsAllList.do?product_kinds=pants">팬츠 <span class="caret"></span></a>
                 <ul class="dropdown-menu"> 
-                  <li><a href="productDetailAllList.do?product_kinds=sports&product_detail=shoes">신발</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=sports&product_detail=top">상의</a></li>
-                  <li><a href="productDetailAllList.do?product_kinds=sports&product_detail=bottom">하의</a></li> 
-                  <li><a href="productDetailAllList.do?product_kinds=sports&product_detail=outerwear">아우터</a></li>                                                                            
+                  <li><a href="productDetailAllList.do?product_kinds=pants&product_detail=shortPants">반바지</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=pants&product_detail=slacks">슬랙스</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=pants&product_detail=cottonPants">면바지</a></li> 
+                  <li><a href="productDetailAllList.do?product_kinds=pants&product_detail=slimPants">슬림일자</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=pants&product_detail=bendingPants">밴딩</a></li>                                                                            
                 </ul>
               </li>
+              
+             <li><a href="product_kindsAllList.do?product_kinds=shoes">신발 <span class="caret"></span></a>
+                <ul class="dropdown-menu"> 
+                  <li><a href="productDetailAllList.do?product_kinds=shoes&product_detail=sandal">샌들&쪼리</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=shoes&product_detail=runningShoes">운동화</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=shoes&product_detail=slimShoes">슬립온</a></li> 
+                  <li><a href="productDetailAllList.do?product_kinds=shoes&product_detail=shoesShoes">구두</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=shoes&product_detail=walker">워커</a></li>                                                                            
+                </ul>
+              </li>
+
+             <li><a href="product_kindsAllList.do?product_kinds=training">트레이닝 <span class="caret"></span></a>
+                <ul class="dropdown-menu"> 
+                  <li><a href="productDetailAllList.do?product_kinds=training&product_detail=set">세트</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=training&product_detail=top">상의</a></li>
+                  <li><a href="productDetailAllList.do?product_kinds=training&product_detail=bottom">하의</a></li>                                                                            
+                </ul>
+              </li>                              
             
             </ul>
           </div>

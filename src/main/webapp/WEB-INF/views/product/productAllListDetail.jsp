@@ -10,10 +10,9 @@ function page(idx) {
 	var pageNum = idx;
 	var contentNum = 12;
 	var product_kinds = $('.active').val();
+	var product_detail = $('#_detail').val();
 	
-	alert(product_kinds);
-	
-	location.href="product_kindsAllList.do?product_kinds="+ product_kinds + "pageNum1="+ pageNum +"&contentNum1="+ contentNum;
+	location.href="product_kindsAllListDetail.do?product_kinds="+ product_kinds + "product_detail=" + product_detail + "pageNum1="+ pageNum +"&contentNum1="+ contentNum;
 }
 
 </script>
@@ -23,6 +22,7 @@ function page(idx) {
         <ol class="breadcrumb">
           <li><a href="main.do">Home</a></li>         
           <li class="active">${product_kinds}</li>
+          <li class="active" id="_detail">${product_detail}</li>
         </ol>
 </div> 
 
@@ -90,7 +90,7 @@ function page(idx) {
 	                      			</c:if>
 	                      			
 	                      			<c:forEach begin="${page.getStartPage() }" end="${page.getEndPage() }" var="idx">
-	                      				<li class="page"> <a href="product_kindsAllList.do?product_kinds=${product_kinds }&pageNum1=${idx}&contentNum1=${page.contentNum}"> ${idx }</a>	</li>
+	                      				<li class="page"> <a href="product_kindsAllListDetail.do?product_kinds=${product_kinds }&product_detail=${product_detail }&pageNum1=${idx}&contentNum1=${page.contentNum}"> ${idx }</a>	</li>
 	                      			
 	                      			</c:forEach>
 	                      			                    			

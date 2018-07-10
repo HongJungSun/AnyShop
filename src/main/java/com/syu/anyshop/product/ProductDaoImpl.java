@@ -60,6 +60,47 @@ public class ProductDaoImpl implements ProductDao{
 		
 		return sqlSession.selectList("product.selectNameProductInfo", searchBox);
 	}
+
+	@Override
+	public int totalProduct(String product_kinds) {
+		
+		return sqlSession.selectOne("product.totalProduct", product_kinds);
+	}
+
+	@Override
+	public List<ProductInfo> getProductPagingData(String product_kinds, int getPageNum, int contentNum) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("product_kinds", product_kinds);
+		map.put("pageNum", String.valueOf(getPageNum));
+		map.put("contentNum", String.valueOf(contentNum));
+		
+		
+		return sqlSession.selectList("product.getProductPagingData", map);
+	}
+
+	@Override
+	public List<ProductInfo> getProductDetailPagingData(String product_kinds, String product_detail, int getPageNum,
+			int contentNum) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("product_kinds", product_kinds);
+		map.put("product_detail", product_detail);
+		map.put("pageNum", String.valueOf(getPageNum));
+		map.put("contentNum", String.valueOf(contentNum));
+		
+		return sqlSession.selectList("product.getProductDetailPagingData", map);
+	}
+
+	@Override
+	public int totalProductDetail(String product_kinds, String product_detail) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("product_kinds", product_kinds);
+		map.put("product_detail", product_detail);
+		
+		return sqlSession.selectOne("product.totalProductDetail", map);
+	}
 	
 	
 }
