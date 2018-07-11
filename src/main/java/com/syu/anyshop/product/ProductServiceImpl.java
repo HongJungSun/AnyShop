@@ -76,6 +76,12 @@ public class ProductServiceImpl implements ProductService{
 		
 		return productDao.getProductDetailPagingData(product_kinds, product_detail, getPageNum, contentNum);
 	}
+
+	@Override
+	public List<String> selectProduct_detail(String product_kinds) {
+		
+		return productDao.selectProduct_detail(product_kinds);
+	}
 	
 
 }

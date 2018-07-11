@@ -25,5 +25,7 @@ public interface ProductDao {
 			int contentNum);
 
 	int totalProductDetail(String product_kinds, String product_detail);
+
+	List<String> selectProduct_detail(String product_kinds);
 	
 }

@@ -16,16 +16,31 @@ function page(idx) {
 	location.href="product_kindsAllList.do?product_kinds="+ product_kinds + "pageNum1="+ pageNum +"&contentNum1="+ contentNum;
 }
 
+function movePage(product_kinds, product_detail) {
+	
+	location.href="productDetailAllList.do?product_kinds="+ product_kinds + "&product_detail=" + product_detail;
+	
+}
+
+
 </script>
 
-<div class="aa-catg-head-banner-content">
-       <h2>Fashion</h2>
+<div class="aa-catg-head-banner-content">      
         <ol class="breadcrumb">
           <li><a href="main.do">Home</a></li>         
           <li class="active">${product_kinds}</li>
         </ol>
+        <ol class="breadcrumb" style="height:50px; background-color:white; text-align: center;">
+	        <c:forEach items="${detail_list}" var="detail_list" varStatus="status">
+	        	<li>
+	        		<button class="btn btn-default" onclick="return movePage('${product_kinds}', '${detail_list }');">
+	        			${detail_list}
+	        		</button> 
+	        	</li>
+	         </c:forEach>
+        </ol>
 </div> 
-
+<hr>
 <div class="">
 	<ul class="aa-product-catg">
 	<c:if test="${list ne null}">
@@ -81,7 +96,7 @@ function page(idx) {
 		</c:forEach> 	
 		</c:if>
 	</ul>
-	
+				<c:if test="${page ne null }">
 						<!-- 페이징 처리 -->  
 							<footer>
                       			<ul class="pagination" id="res">
@@ -100,8 +115,10 @@ function page(idx) {
                       			</ul>
  							</footer>
  						<!-- / 페이징 처리 --> 
-		
+				</c:if>
 </div>
+
+
 
 					                          	            
 <hr>

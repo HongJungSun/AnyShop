@@ -55,16 +55,14 @@ $(document).ready(function(){
     		   $('#_Indigo').prop("checked", true);
     	   }	   
        });
-	
-	
-	
+		
 	
      //상품 대분류 클릭시 소분류 보여주기
 	$('#_product_kinds').on("change", function(){
 		
 		var obj = $(this).val();
 		
-	    if(obj == "T-shirts") {
+	    if(obj == "티셔츠") {
 	    	
 	    	$('#_size2').css("display", "");
 	    	$('#_shoes2').css("display", "none");
@@ -75,7 +73,7 @@ $(document).ready(function(){
 	        $('#_shoes').css("display", "none");
 	        $('#_training').css("display", "none");
 
-	    } else if (obj == "outerwear" ){
+	    } else if (obj == "아우터" ){
 	    	
 	    	$('#_size2').css("display", "");
 	    	$('#_shoes2').css("display", "none");
@@ -86,7 +84,7 @@ $(document).ready(function(){
 	          $('#_shoes').css("display", "none");
 	          $('#_training').css("display", "none");
 
-	     } else if (obj == "shirts" ){
+	     } else if (obj == "셔츠" ){
 	    	 
 	    	 $('#_size2').css("display", "");
 	    	 $('#_shoes2').css("display", "none");
@@ -97,7 +95,7 @@ $(document).ready(function(){
 	          $('#_shoes').css("display", "none");
 	          $('#_training').css("display", "none");
 
-	      } else if (obj == "pants" ){
+	      } else if (obj == "팬츠" ){
 	    	  
 	    	  $('#_size2').css("display", "");
 	    	  $('#_shoes2').css("display", "none");
@@ -108,7 +106,7 @@ $(document).ready(function(){
 	          $('#_shoes').css("display", "none");
 	          $('#_training').css("display", "none");
 
-	       } else if (obj == "shoes" ){
+	       } else if (obj == "신발" ){
 	    	   
 	    	   $('#_size2').css("display", "none");
 	    	   $('#_shoes2').css("display", "");
@@ -274,12 +272,12 @@ function back() {
             <td>
             	<select name="product_kinds" id="_product_kinds">
             		<option value="">-- 대분류를 선택해주세요.--</option>
-            		<option value="T-shirts"> T-shirts</option>
-            		<option value="outerwear"> 아우터 </option>
-            		<option value="shirts"> 셔츠 </option>
-            		<option value="pants"> 팬츠 </option>
-            		<option value="shoes"> 신발 </option>
-            		<option value="training"> 트레이닝 </option>
+            		<option value="티셔츠"> 티셔츠</option>
+            		<option value="아우터"> 아우터 </option>
+            		<option value="셔츠"> 셔츠 </option>
+            		<option value="팬츠"> 팬츠 </option>
+            		<option value="신발"> 신발 </option>
+            		<option value="트레이닝"> 트레이닝 </option>
             	</select>
             </td>
         </tr>
@@ -288,52 +286,52 @@ function back() {
             <td>
             	<select name="product_detail" id="_T-shirts" style="display:none ;">
             		<option value=""> --소분류를 선택해주세요.--</option>
-            		<option value="shortSleeveTee"> 반팔&7부티 </option>
-            		<option value="vest"> 조끼&나시티 </option>
-            		<option value="longSleeveTee"> 긴팔티 </option>
-            		<option value="manToMan"> 맨투맨 </option>
-            		<option value="hoodT-shirt"> 후드티 </option>
+            		<option value="반팔&7부티"> 반팔&7부티 </option>
+            		<option value="조끼&나시티"> 조끼&나시티 </option>
+            		<option value="긴팔티"> 긴팔티 </option>
+            		<option value="맨투맨"> 맨투맨 </option>
+            		<option value="후드티"> 후드티 </option>
             	</select>
 
             	<select name="product_detail" id="_outerwear" style="display:none ;">
             		<option value=""> --소분류를 선택해주세요.--</option>
-            		<option value="jacket"> 자켓 </option>
-            		<option value="cardigan"> 가디건 </option>
-            		<option value="padding"> 패딩 </option>
-            		<option value="zipUp"> 집업 </option>
+            		<option value="자켓"> 자켓 </option>
+            		<option value="가디건"> 가디건 </option>
+            		<option value="패딩"> 패딩 </option>
+            		<option value="집업"> 집업 </option>
             	</select>
 
             	<select name="product_detail" id="_shirts" style="display:none ;">
             		<option value=""> --소분류를 선택해주세요.--</option>
-            		<option value="basicShirts"> 베이직&데님 </option>
-            		<option value="shortShirts"> 반팔&7부 </option>
-            		<option value="checkShirts"> 체크&패턴 </option>
-            		<option value="longShirts"> 긴팔 </option>
+            		<option value="베이직&데님"> 베이직&데님 </option>
+            		<option value="반팔&7부"> 반팔&7부 </option>
+            		<option value="체크&패턴"> 체크&패턴 </option>
+            		<option value="긴팔"> 긴팔 </option>
             	</select>
 
             	<select name="product_detail" id="_pants" style="display:none ;">
             		<option value=""> --소분류를 선택해주세요.--</option>
-            		<option value="shoes"> 신발 </option>
-            		<option value="top"> 상의 </option>
-            		<option value="bottom"> 하의 </option>
-            		<option value="outerwear"> 아우터 </option>
-            		<option value="skirt"> 치마 </option>
+            		<option value="반바지"> 반바지 </option>
+            		<option value="슬랙스"> 슬랙스 </option>
+            		<option value="면바지"> 면바지 </option>
+            		<option value="슬림일자"> 슬림일자 </option>
+            		<option value="밴딩"> 밴딩 </option>
             	</select>
 
             	<select name="product_detail" id="_shoes" style="display:none ;">
             		<option value=""> --소분류를 선택해주세요.--</option>
-            		<option value="sandal"> 샌들&쪼리 </option>
-            		<option value="runningShoes"> 운동화 </option>
-            		<option value="slimShoes"> 슬립온 </option>
-            		<option value="shoesShoes"> 구두 </option>
-            		<option value="walker"> 워커 </option>
+            		<option value="샌들&쪼리"> 샌들&쪼리 </option>
+            		<option value="운동화"> 운동화 </option>
+            		<option value="슬립온"> 슬립온 </option>
+            		<option value="구두"> 구두 </option>
+            		<option value="워커"> 워커 </option>
             	</select>
 
             	<select name="product_detail" id="training" style="display:none ;">
             		<option value=""> --소분류를 선택해주세요.--</option>
-            		<option value="set"> 세트 </option>
-            		<option value="top"> 상의 </option>
-            		<option value="bottom"> 하의 </option>
+            		<option value="세트"> 세트 </option>
+            		<option value="상의"> 상의 </option>
+            		<option value="하의"> 하의 </option>
 
             	</select>
             </td>            

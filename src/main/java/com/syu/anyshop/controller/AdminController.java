@@ -313,6 +313,9 @@ public class AdminController {
 		@RequestMapping(value = "editProductCommit.do")
 		public String editProductCommit(Model model, @ModelAttribute ProductInfo productInfo) {
 			logger.info("Welcome adminController editProductCommit! "+ new Date());
+			
+			// ,로 들어오는값 제거
+			productInfo.setProduct_detail(productInfo.getProduct_detail().replaceAll(",",""));
 									
 			adminService.editProductCommit(productInfo);				
 						

@@ -25,5 +25,7 @@ public interface ProductService {
 
 	List<ProductInfo> getProductDetailPagingData(String product_kinds, String product_detail, int getPageNum, int contentNum);
 
+	List<String> selectProduct_detail(String product_kinds);
+
 	
 }

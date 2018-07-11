@@ -37,28 +37,10 @@ public class LoginController {
 		logger.info("Welcome loginController home! " + new Date());
 		
 		List<ProductInfo> productInfo= new ArrayList<ProductInfo>(); // 메인 화면 (최신 상품 5개)
-		List<ProductInfo> manProductInfo= new ArrayList<ProductInfo>(); // 남자 상품 정보
-		List<ProductInfo> womenProductInfo= new ArrayList<ProductInfo>(); // 여자 상품 정보
-		List<ProductInfo> kidsProductInfo= new ArrayList<ProductInfo>(); // 어린이 상품 정보
-		List<ProductInfo> sportsProductInfo= new ArrayList<ProductInfo>(); // 스포츠 상품 정보 
-		
-		
+ 		
 		productInfo= loginService.mainScreen();
 		model.addAttribute("productInfo",productInfo);
-		
-		manProductInfo= loginService.mainProductAllList("man");
-		model.addAttribute("manProductInfo",manProductInfo);
-		
-		womenProductInfo= loginService.mainProductAllList("women");
-		model.addAttribute("womenProductInfo",womenProductInfo);
-		
-		kidsProductInfo= loginService.mainProductAllList("kids");
-		model.addAttribute("kidsProductInfo",kidsProductInfo);
-		
-		sportsProductInfo= loginService.mainProductAllList("sports");
-		model.addAttribute("sportsProductInfo",sportsProductInfo);
-		
-		
+				
 		
 		return "home/home";
 	}

@@ -65,6 +65,15 @@
 		order by product_id desc
 		limit ${pageNum}, ${contentNum}
 	</select>
+	
+<!-- 상품 리스트 페이지에 보여질 product_detail -->
+	<!-- 상품 대분류 페이징을 위한 현재 블록에서 가져올 데이터 가져오기 --> 
+	<select id="selectProduct_detail"  resultType="java.lang.String">
+		select product_detail
+		from product
+		WHERE product_kinds= #{product_kinds}
+		Group by product_detail
+	</select>	
     
 	
 </mapper>

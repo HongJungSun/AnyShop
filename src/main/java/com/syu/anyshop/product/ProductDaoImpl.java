@@ -101,6 +101,12 @@ public class ProductDaoImpl implements ProductDao{
 		
 		return sqlSession.selectOne("product.totalProductDetail", map);
 	}
+
+	@Override
+	public List<String> selectProduct_detail(String product_kinds) {
+		
+		return sqlSession.selectList("product.selectProduct_detail", product_kinds);
+	}
 	
 	
 }
