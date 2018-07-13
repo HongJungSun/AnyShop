@@ -3,6 +3,8 @@ package com.syu.anyshop.payment;
 import java.util.List;
 import java.util.Map;
 
+import com.syu.anyshop.wishlist.WishListInfo;
+
 public interface PaymentService {
 
 	int regipayComplete(Map<String,Object> map1);
@@ -22,6 +24,10 @@ public interface PaymentService {
 	String selectProduct_price(String id, String cancelPayment);
 
 	int minusPoint(int point, String product_price, String id);
+
+	WishListInfo selectWishlist(String wishlist_idx);
+
+	void usePoint(String id, int usePoint);
 
 
 }

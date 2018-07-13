@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.syu.anyshop.wishlist.WishListInfo;
+
 @Repository
 public class PaymentDaoImpl implements PaymentDao{
 	
@@ -90,6 +92,24 @@ public class PaymentDaoImpl implements PaymentDao{
 		map.put("updatePoint",  String.valueOf(updatePoint));
 		
 		return sqlSession.update("payment.minusPoint", map);
+	}
+
+	@Override
+	public WishListInfo selectWishlist(String wishlist_idx) {
+		
+		return sqlSession.selectOne("payment.selectWishlist", wishlist_idx);
+	}
+
+	@Override
+	public void usePoint(String id, int usePoint) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		map.put("id", id);
+		map.put("usePoint",  String.valueOf(usePoint));
+		
+		sqlSession.update("payment.usePoint", map);
+		
 	}
 
 

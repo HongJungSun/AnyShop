@@ -5,9 +5,9 @@
 
 	<!-- 결제 결과 내용 저장 -->
 	<insert id="regipayComplete" parameterType="HashMap">
-		insert into payment( id, imp_uid, apply_num, product_id, product_price, product_name, product_quantity, product_size, product_color,
+		insert into payment( id, imp_uid, apply_num, product_id, product_price, product_name, address, product_quantity, product_size, product_color,
 								gender, name, age, height, weight ) 
-		values (#{id}, #{imp_uid}, #{apply_num}, #{product_id}, #{product_price}, #{product_name}, #{product_quantity}, #{product_size}, 
+		values (#{id}, #{imp_uid}, #{apply_num}, #{product_id}, #{product_price}, #{product_name}, #{address}, #{product_quantity}, #{product_size}, 
 				#{product_color}, #{gender}, #{name}, #{age}, #{height}, #{weight})
 
 	</insert>
@@ -75,7 +75,27 @@
 		set point = #{updatePoint} 
 		where id= #{id}
 		
+	</update> 
+	
+	<!-- wishlist_idx 통해서 장바구니 상품 정보 가져오기 -->
+	<select id="selectWishlist" resultType="com.syu.anyshop.wishlist.WishListInfo">
+		select *
+		from wishlist
+		where wishlist_idx= #{wishlist_idx}
+	</select>	
+	
+	
+	<!-- 사용 포인트 차감 -->
+	<update id="usePoint">
+		update member
+		set point= point - ${usePoint}
+		where id = {id}		
 	</update>
+	
+	
+	
+	
+	
 	
 	
 </mapper>

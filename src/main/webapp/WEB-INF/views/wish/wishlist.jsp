@@ -9,6 +9,15 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
+    <!-- 결제 스크립트 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+					
+	<script>
+		IMP.init('imp23299716'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	</script>	    
+    
  <script>	
 	
 	$(document).ready(function(){
@@ -49,7 +58,10 @@
 		
 		// 장바구니 품목 제거
 		$('.remove').click(function(){
-			var wishlist_idx = $('#_wishlist_idx').val();
+			
+			var index = $('.remove').index(this);
+			alert(index);
+			var wishlist_idx = $(".wishlist_idx:eq("+ index +")").val();
 			
 			if(confirm('정말로 장바구니에서 지우시겠습니까?') == true) {
     			$.ajax ({
@@ -73,10 +85,62 @@
 				return false;
 			}
 		});		
+				
+		
+		// 선택 상품 결제 객체가 담긴 배열 order.jsp로 넘기기 
+		$('#_requestPay01').on("click", function(){
+												
+			var wishlist_idxArr = [];             // 장바구니 삼품idx 를 담을 배열
+						
+			//선택된 체크박스 확인
+			$('.select').each(function() {
+								
+				//체크 확인
+				if($(this).prop("checked") == true ) {
+					
+					var index= $('.select').index(this);
+					var wishlist_idx = $(".wishlist_idx:eq("+ index +")").val();					
+					
+					
+					wishlist_idxArr.push(wishlist_idx);
+				}
+								
+				
+			});
+			
+			
+			if(wishlist_idxArr.length == 0) {
+				alert('상품을 한개 이상 선택해 주세요.');
+			} else {
+				location.href="order.do?wishlist_idxArr=" + wishlist_idxArr;
+			}
+		});		
+
 		
 		
-
-
+		// 전체 상품 결제 객체가 담긴 배열 order.jsp로 넘기기 
+		$('#_requestPay02').on("click", function(){
+												
+			var wishlist_idxArr = [];             // 장바구니 삼품idx 를 담을 배열
+						
+			//선택된 체크박스 확인
+			$('.select').each(function() {
+												
+					var index= $('.select').index(this);
+					var wishlist_idx = $(".wishlist_idx:eq("+ index +")").val();					
+									
+					wishlist_idxArr.push(wishlist_idx);								
+				
+			});
+			
+			
+			if(wishlist_idxArr.length == 0) {
+				alert('상품을 한개 이상 선택해 주세요.');
+			} else {
+				location.href="order.do?wishlist_idxArr=" + wishlist_idxArr;
+			}
+		});			
+		
 	});
 		 	
 
@@ -107,8 +171,8 @@
                     <tbody>                    	
 	                    <c:if test="${wishListInfo ne null }">	    	                                   	
 		                    <c:forEach var="wishListInfo" items="${wishListInfo}" varStatus="status">
-		                    <input type="hidden" id="_wishlist_idx" class="wishlist_idx" name="wishlist_idx" value="${wishListInfo.wishlist_idx}"> 	
-		                    <input type="hidden" id="_id" value="${sessionScope.loginInfo.id }">			                                        
+		                    <input type="hidden" class="wishlist_idx" name="wishlist_idx" value="${wishListInfo.wishlist_idx}"> 	
+		                    <input type="hidden" value="${sessionScope.loginInfo.id }">			                                        
 			                   <tr>
 			                   	  <td>
 			                      	<input type="checkbox" name="select" class="select" value="${status.index }">
@@ -151,13 +215,15 @@
         			<input type="text" name="totalPrice" id="_totalPrice" value="0" readonly style="border:0; text-align:center; background-color: #F5F5F5;"> 원
         		</div>
         		<div style="float:right;"> * 총 구매금액 </div>
-        		<hr>  
-   
+        		<hr> 
           	</form>
            </div>
      	 </div>
        </div>
-
      </div>
-   </div>             
+     
+               	<button class="aa-cart-view-btn" type="submit" id="_requestPay01" style="float:right;">선택 상품 구매하기</button>
+        		<button class="aa-cart-view-btn" type="submit" id="_requestPay02" style="float:right;">전체 구매하기 </button>
+   </div>
+                
 </section>            

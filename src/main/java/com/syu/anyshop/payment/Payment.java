@@ -10,7 +10,8 @@ public class Payment {
 	private int apply_num;       // 승인 번호
 	private int product_id;      // 상품 번호
 	private String product_price;   // 상품 가격
-	private String product_name; // 상품명
+	private String product_name;  // 상품명
+	private String adress;        // 배달 주소
 	private int product_quantity; // 상품 수량
 	private String product_size; // 상품 사이즈
 	private String product_color; //상품 컬러

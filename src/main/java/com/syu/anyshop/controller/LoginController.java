@@ -84,11 +84,11 @@ public class LoginController {
 	                request.getSession().setAttribute("login", 0);
 	                /*request.getSession().setMaxInactiveInterval(30*60); //10분*/	
 	                
+	                request.getSession().setAttribute("loginInfo", loginInfo2);
 	                request.getSession().setAttribute("id", loginInfo2.getId());
 	                request.getSession().setAttribute("age", loginInfo2.getAge());
 	                request.getSession().setAttribute("gender", loginInfo2.getGender());
-	                request.getSession().setAttribute("name", loginInfo2.getName());
-	                request.getSession().setAttribute("loginInfo", loginInfo2);
+	                request.getSession().setAttribute("name", loginInfo2.getName());	                
 	                
 	                return "forward:/main.do";
             	}
@@ -121,6 +121,8 @@ public class LoginController {
 	@RequestMapping(value = "regiAfter.do")
 	public String regiAfter(LoginInfo loginInfo) {
 		logger.info("Welcome LoginController regiAfter! "+ new Date());
+		
+		logger.info("아이디 정보값: " + loginInfo.toString());
 		
 		loginService.addMember(loginInfo);
 		

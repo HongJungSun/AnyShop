@@ -1,12 +1,15 @@
 package com.syu.anyshop.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +22,16 @@ import com.syu.anyshop.login.LoginInfo;
 import com.syu.anyshop.login.LoginService;
 import com.syu.anyshop.payment.Payment;
 import com.syu.anyshop.payment.PaymentService;
+import com.syu.anyshop.wishlist.WishListInfo;
 
 import net.sf.json.JSONArray;
 
 @Controller
 public class PaymentController {
+	
+	@SuppressWarnings("unused")
+	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+	
 	@Autowired
 	private PaymentService paymentService;	
 
@@ -34,26 +42,27 @@ public class PaymentController {
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping( value="payComplete.do")
-	public HashMap<String, Integer> payComplete(@RequestBody String paymentListInfo, HttpServletRequest request) {
-		
+	public HashMap<String, Integer> payComplete(@RequestBody String paymentListInfo, HttpServletRequest request, @RequestParam int usePoint) {
+		logger.info("paymentComplete " + new Date());
 		int result = 0;
 		
 		 List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
 		 map = JSONArray.fromObject(paymentListInfo);
 		 
-		 int point = paymentService.selectId(map.get(0).get("id").toString());
+		 // 사용 포인트 차감
+		 paymentService.usePoint(map.get(0).get("id").toString(), usePoint);
+		 		
 		 		 
-		 for(Map<String,Object> map1 : map) {			 
+		 for(Map<String,Object> map1 : map) {	
+			 int point = paymentService.selectId(map1.get("id").toString());
 			 result = paymentService.regipayComplete(map1);
 			 paymentService.updatePoint(point, map1.get("product_price").toString(), map1.get("id").toString());
 
-		 }		 
+		 }
 		 
 		 // 결제 후 세션 업데이트
 		 String id = (String) request.getSession().getAttribute("id");
 		 LoginInfo loginInfo = loginService.sessionUpadte(id);
-		  
-		 System.out.println("id 값:" + id);
 		 
 		 request.getSession().setAttribute("loginInfo", loginInfo);
          request.getSession().setAttribute("age", loginInfo.getAge());
@@ -137,7 +146,22 @@ public class PaymentController {
 		return map;  
 	}
 	
-	
+
+	// 장바구니 페이지에서 선택된 장바구니idx 읽어들여서 order.jsp로 넘기기
+	@RequestMapping( value="order.do")
+	public String order(Model model, @RequestParam String[] wishlist_idxArr) {
+		
+		List<WishListInfo> list = new ArrayList<WishListInfo>();
+		
+		for(String wishlist_idx : wishlist_idxArr ) {
+						
+			list.add(paymentService.selectWishlist(wishlist_idx));
+		}
+
+		model.addAttribute("list",list);
+		
+		return "payment/order";  
+	}	
 	
 	
 	

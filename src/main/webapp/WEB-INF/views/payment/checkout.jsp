@@ -24,9 +24,12 @@
 	            openWin = window.open("child.do?imp_uid=" + imp_uid ,
 	                    "childForm", "width=570, height=350, resizable = no, scrollbars = no"); 
 	            
-	           
-	            
 	        }
+	      
+          
+          function reload() {
+          	window.location.reload();
+          }
 
 	</script>
 

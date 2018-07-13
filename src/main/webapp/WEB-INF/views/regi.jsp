@@ -157,8 +157,8 @@
  			<div class="col-sm-6">
 	        	<input type="text" name="address1" id="sample4_postcode" placeholder="우편번호"> 
 					<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
-					<input type="text" name="address" class="form-control" id="sample4_roadAddress" placeholder="기본 주소">
-					<input type="text" name="address" class="form-control" id="sample4_jibunAddress" placeholder="상세주소">
+					<input type="text" name="address2" class="form-control" id="sample4_roadAddress" placeholder="기본 주소">
+					<input type="text" name="address3" class="form-control" id="sample4_jibunAddress" placeholder="상세주소">
 					<span id="_address1"></span>
 					<input type="hidden" id="addressCheck" value="addressUnCheck">
 			</div>

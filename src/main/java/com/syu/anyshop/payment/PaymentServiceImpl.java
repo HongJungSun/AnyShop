@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.syu.anyshop.wishlist.WishListInfo;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
 	
@@ -73,6 +75,19 @@ public class PaymentServiceImpl implements PaymentService {
 		int updatePoint= (int) (point - ( product_price1 * 0.01 ));
 		
 		return paymentDao.minusPoint(updatePoint, id);
+	}
+
+	@Override
+	public WishListInfo selectWishlist(String wishlist_idx) {
+		
+		return paymentDao.selectWishlist(wishlist_idx);
+	}
+
+	@Override
+	public void usePoint(String id, int usePoint) {
+		
+		paymentDao.usePoint(id, usePoint);
+		
 	}
 
 	

@@ -46,9 +46,9 @@
 	     	   	                    
 	     	   	                    success: function(msg) {
 	     	   	                    	if(msg.result == 1){
-	     	   	                    		alert('결제가 성공적으로 취소 되었습니다.');	     	   	                    		
+	     	   	                    		alert('결제가 성공적으로 취소 되었습니다.');
+	     	   	                    		opener.parent.reload();
 	     	        	            		window.close();
-	     	        	            		window.location.reload();
 	     	        	          
 	     	   	                    	}
 	     	   	                    },		

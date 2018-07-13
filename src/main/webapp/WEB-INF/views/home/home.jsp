@@ -7,7 +7,7 @@
   <!-- Start slider -->
   <section id="aa-slider">
     <div class="aa-slider-area">
-      <div id="sequence" class="seq">
+      <div id="sequence" class="seq" style="width: 70%; height:500px;">
         <div class="seq-screen">
           <ul class="seq-canvas">
             <!-- single slide item -->
@@ -17,7 +17,7 @@
                 <img data-seq src="resources/product/${productInfo.product_img}" alt="recent product top5" />
               </div>
               <div class="seq-title">
-               <span data-seq>최신상품 ${i.count}</span>                
+               <span style="color:black;">최신상품 ${i.count}</span>             
                 <h2 data-seq>${productInfo.product_name }</h2>                
                <!--  <p data-seq></p> -->
                 <a data-seq href="viewProduct.do?product_id=${productInfo.product_id}" class="aa-shop-now-btn aa-secondary-btn">바로 구매하러가기 </a>
@@ -33,7 +33,7 @@
           <a type="button" class="seq-next" aria-label="Next"><span class="fa fa-angle-right"></span></a>
         </fieldset>
       </div>
-    </div>
+    </div> 
   </section>
   <!-- / slider -->
   
