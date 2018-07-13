@@ -13,15 +13,29 @@ public class SearchBoxDaoImpl implements SearchBoxDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public void regiSearchBox(String searchBox, String id, int age, String gender) {
+	public void regiSearchBox(SearchBoxInfo searchBox) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("searchBox", searchBox);
-		map.put("id", id);
-		map.put("age", String.valueOf(age));
-		map.put("gender", gender);	
+		map.put("searchBox", searchBox.getSearchBox());
+		map.put("id", searchBox.getId());
+		map.put("age", String.valueOf(searchBox.getAge()));
+		map.put("gender", searchBox.getGender());	
 		
 		sqlSession.insert("searchBox.regiSearchBox", map);
 		return;
+	}
+
+	@Override
+	public void regiSearchBox_noSession(SearchBoxInfo searchBox) {
+	
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("searchBox", searchBox.getSearchBox());
+		map.put("id", "비로그인");
+		map.put("age", "비로그인");
+		map.put("gender", "비로그인");	
+		
+		sqlSession.insert("searchBox.regiSearchBox_noSession", map);
+		return;		
+		
 	}
 }

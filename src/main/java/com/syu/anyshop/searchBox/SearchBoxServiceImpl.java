@@ -10,10 +10,18 @@ public class SearchBoxServiceImpl implements SearchBoxService {
 	private SearchBoxDao searchBoxDao;
 
 	@Override
-	public void regiSearchBox(String searchBox, String id, int age, String gender) {
+	public void regiSearchBox(SearchBoxInfo searchBox) {
 		
-		searchBoxDao.regiSearchBox(searchBox, id, age, gender);
-		return;
+		searchBoxDao.regiSearchBox(searchBox);
+
+	}
+
+	@Override
+	public void regiSearchBox_noSession(SearchBoxInfo searchBox) {
+		
+		searchBoxDao.regiSearchBox_noSession(searchBox);
+
+		
 	}
 
 }

@@ -9,6 +9,7 @@
   	  <script>
   	   $(document).ready(function() { 		   
  		   
+  		 // 연관 검색어  
   		 $( "#_searchBox" ).autocomplete({
   	        source : function( request, response ) {
   	             $.ajax({
@@ -140,24 +141,30 @@
            	<!-- search box -->
               <div class="aa-search-box">
                 <form id="_search" action="searchBoxClick.do" method="get" onSubmit="return checkSearchBox();">
-                	<input type="hidden" name="id" value="${sessionScope.id}">
-                	<input type="hidden" name="age" value="${sessionScope.age}">
-                	<input type="hidden" name="gender" value="${sessionScope.gender}">
-                  	<input type="text" name="searchBox" id="_searchBox" placeholder="찾으시는 것을 검색하세요.">
+                	<c:if test="${sessionScope.loginInfo.id ne null }">
+                		<input type="hidden" name="id" value="${sessionScope.id}">               	
+                		<input type="hidden" name="age" value="${sessionScope.age}">	
+                		<input type="hidden" name="gender" value="${sessionScope.gender}">
+                	</c:if>	
+                  		<input type="text" name="searchBox" id="_searchBox" placeholder="찾으시는 것을 검색하세요.">
+
                 	<button type="submit"><span class="fa fa-search"></span></button> 
                 </form>
               </div>   
               
-              <script>       	   
-	         	   function checkSearchBox() {
-	         		   if($('input[name=id]' ).val() == null ) {
-	         			   alert('AnyShop 이용은 로그인 후 이용 가능 합니다.');
-	         			   return false;
-	         		   } else {
-	         			   return true;
-	         		   }
-	         	   }
-              </script>                         
+              <script>
+              	function checkSearchBox() {
+       
+              		if( $('#_searchBox').val() == null ) {
+              			alert('검색어를 입력하세요.');
+              			return false;
+              		}
+              	}
+              	
+              
+              
+              </script>
+                                     
             <!-- / search box -->   
                         
             </div>

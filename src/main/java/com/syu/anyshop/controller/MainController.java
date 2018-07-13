@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.syu.anyshop.product.ProductInfo;
 import com.syu.anyshop.product.ProductService;
+import com.syu.anyshop.searchBox.SearchBoxInfo;
+import com.syu.anyshop.searchBox.SearchBoxService;
 
 @Controller
 public class MainController {
@@ -24,6 +26,9 @@ public class MainController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private SearchBoxService searchBoxService;
 		
 	
 	// searchBox 키워드 검색하면 연관검색어 보여주기
@@ -40,5 +45,27 @@ public class MainController {
 			 
 			return map;
 						
-		}
+		} 
+			
+			
+			
+			// searchBox 키워드 검색 기능
+			@RequestMapping(value = "searchBoxClick.do")
+			public String searchBox(Model model, SearchBoxInfo searchBox) {
+				logger.info("Welcome mainController searchBoxClick! " + new Date());
+				
+				List<ProductInfo> list = productService.selectNameProductInfo(searchBox.getSearchBox());			
+				
+				// 세션값 확인
+				if( searchBox.getId() == null ) {
+					searchBoxService.regiSearchBox_noSession(searchBox);
+				} else {
+				 
+					searchBoxService.regiSearchBox(searchBox);
+				}
+				model.addAttribute("list", list);
+				
+				return "product/productAllList";
+							
+			}			
 }

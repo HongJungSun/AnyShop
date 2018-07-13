@@ -3,8 +3,14 @@
 
 <mapper namespace="searchBox">
 	
-	<!-- 사용자가 검색한 search 저장하기 -->
+	<!-- 로그인 사용자가 검색한 search 저장하기 -->
 	<insert id="regiSearchBox">
+		insert into searchBox
+		values(#{id}, #{age}, #{gender}, #{searchBox})
+	</insert>
+	
+	<!-- 비로그인 사용자가 검색한 search 저장하기 -->
+	<insert id="regiSearchBox_noSession">
 		insert into searchBox
 		values(#{id}, #{age}, #{gender}, #{searchBox})
 	</insert>
