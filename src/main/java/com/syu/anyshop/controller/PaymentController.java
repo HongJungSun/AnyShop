@@ -42,7 +42,7 @@ public class PaymentController {
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping( value="payComplete.do")
-	public HashMap<String, Integer> payComplete(@RequestBody String paymentListInfo, HttpServletRequest request, @RequestParam int usePoint) {
+	public HashMap<String, Integer> payComplete(@RequestBody String paymentListInfo, HttpServletRequest request) {
 		logger.info("paymentComplete " + new Date());
 		int result = 0;
 		
@@ -50,7 +50,7 @@ public class PaymentController {
 		 map = JSONArray.fromObject(paymentListInfo);
 		 
 		 // 사용 포인트 차감
-		 paymentService.usePoint(map.get(0).get("id").toString(), usePoint);
+		 paymentService.usePoint(map.get(0).get("id").toString(), map.get(0).get("usePoint").toString());
 		 		
 		 		 
 		 for(Map<String,Object> map1 : map) {	

@@ -84,7 +84,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public void usePoint(String id, int usePoint) {
+	public void usePoint(String id, String usePoint) {
 		
 		paymentDao.usePoint(id, usePoint);
 		

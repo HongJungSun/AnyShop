@@ -27,7 +27,7 @@ public interface PaymentService {
 
 	WishListInfo selectWishlist(String wishlist_idx);
 
-	void usePoint(String id, int usePoint);
+	void usePoint(String id, String usePoint);
 
 
 }

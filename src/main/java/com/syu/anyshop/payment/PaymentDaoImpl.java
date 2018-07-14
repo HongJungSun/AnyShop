@@ -101,12 +101,12 @@ public class PaymentDaoImpl implements PaymentDao{
 	}
 
 	@Override
-	public void usePoint(String id, int usePoint) {
+	public void usePoint(String id, String usePoint) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 
 		map.put("id", id);
-		map.put("usePoint",  String.valueOf(usePoint));
+		map.put("usePoint",  usePoint);
 		
 		sqlSession.update("payment.usePoint", map);
 		

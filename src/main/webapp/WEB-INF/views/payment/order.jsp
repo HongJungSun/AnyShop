@@ -122,7 +122,6 @@ function requestPay() {
 	
 	else {
 		
-	
 		var paymentListInfo =[];
 		var i = $('.status').length;    // 결제 상품 총 갯수
 		var amount = 1000 - point;
@@ -175,21 +174,18 @@ function requestPay() {
 					paymentObject.name = $('input[name=name]').val();
 					paymentObject.age = $('#_age').val();
 					paymentObject.height = $('#_height').val();
-					paymentObject.weight = $('#_weight').val();   								
+					paymentObject.weight = $('#_weight').val();
+					paymentObject.usePoint = point;
 					
 					paymentListInfo.push(paymentObject);
 	
 				}													
-	      
-		        
 		             $.ajax({
 		                    type: 'post',
 		                    url: "payComplete.do",
 		                    dataType: "json",
-		                    data: { paymentListInfo : JSON.stringify(paymentListInfo),
-		                    		point : point
-		                    },
-	   	            contentType: "application/json; charset=UTF-8",
+		                    data: JSON.stringify(paymentListInfo),
+	   	            		contentType: "application/json; charset=UTF-8",
 	   	            success: function(msg) {
 	   	            	if(msg.result ==1 ){
 	   	            		alert('결제에 성공하셨습니다.');
@@ -197,6 +193,7 @@ function requestPay() {
 	 	            			
 	   	            			location.href="checkout.do?id=" + $('#_id').val(); 
 	   	            		}	
+	   	            		
 	   	            	}
 	   	            },
 		               });			  	             

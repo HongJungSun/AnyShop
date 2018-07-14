@@ -89,7 +89,7 @@
 	<update id="usePoint">
 		update member
 		set point= point - ${usePoint}
-		where id = {id}		
+		where id = #{id}		
 	</update>
 	
 	

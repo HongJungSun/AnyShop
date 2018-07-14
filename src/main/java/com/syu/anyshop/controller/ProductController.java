@@ -102,7 +102,7 @@ public class ProductController {
 
 		} else if (product_kinds.equals("팬츠")) {
 
-			detail_list.add("반바지/쪼리");
+			detail_list.add("반바지");
 			detail_list.add("슬랙스");
 			detail_list.add("면바지");
 			detail_list.add("슬림일자");
