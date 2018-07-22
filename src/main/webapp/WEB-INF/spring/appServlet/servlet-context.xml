@@ -16,6 +16,17 @@
 	<!-- Spring MVC @Controller 프로그래밍 모델을 가능하게한다.-->
 	<annotation-driven />	
 
+	<!-- aop 설정 & aspect빈 등록 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<beans:bean class="com.syu.anyshop.aspect.ControllerLoggingAspect" />
+	<beans:bean class="com.syu.anyshop.aspect.LoginServiceAspect" />
+	<beans:bean class="com.syu.anyshop.aspect.AdminServiceAspect" />
+	<beans:bean class="com.syu.anyshop.aspect.PaymentServiceAspect" />
+	<beans:bean class="com.syu.anyshop.aspect.ProductServiceAspect" />
+	<beans:bean class="com.syu.anyshop.aspect.QuestionBoardServiceAspect" />
+	<beans:bean class="com.syu.anyshop.aspect.ReviewServiceAspect" />
+	<beans:bean class="com.syu.anyshop.aspect.SearchBoxServiceAspect" />
+	<beans:bean class="com.syu.anyshop.aspect.WishListServiceAspect" />
 
 	<resources mapping="/resources/**" location="/resources/product/" />
 

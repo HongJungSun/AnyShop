@@ -1,7 +1,6 @@
 package com.syu.anyshop.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +21,6 @@ import com.syu.anyshop.product.ProductInfo;
 
 @Controller
 public class LoginController {
-	private static final Logger logger = 
-			LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private LoginService loginService;
@@ -34,7 +29,6 @@ public class LoginController {
 	//메인 페이지 
 	@RequestMapping(value = "main.do")
 	public String main(Model model, HttpServletRequest request) {
-		logger.info("Welcome loginController home! " + new Date());
 		
 		List<ProductInfo> productInfo= new ArrayList<ProductInfo>(); // 메인 화면 (최신 상품 5개)
  		
@@ -48,7 +42,6 @@ public class LoginController {
 	//로그인
 	@RequestMapping(value = "login.do")
 	public String main(Model model) {
-		logger.info("Welcome loginController home! "+new Date());
 		
 		return "login/login";
 	}
@@ -56,7 +49,6 @@ public class LoginController {
 	//로그인 결과
 	@RequestMapping(value = "loginAfter.do")
 	public String loginCheck(Model model, LoginInfo loginInfo, HttpServletRequest request) {
-		logger.info("Welcome LoginController loginAf! "+ new Date());
                
         if((loginInfo.getId() != null && !loginInfo.getId().equals("")
                 && loginInfo.getPw() != null && !loginInfo.getPw().equals(""))){
@@ -104,7 +96,7 @@ public class LoginController {
 	//로그아웃
 	@RequestMapping(value = "logout.do")
 	public String logout(Model model, HttpServletRequest request) {
-		logger.info("Welcome LoginController logout! "+ new Date());
+		
 		request.getSession().invalidate();
 		return "redirect:/main.do";
 	}
@@ -112,7 +104,6 @@ public class LoginController {
 	//회원가입
 	@RequestMapping(value = "regi.do")
 	public String regi(Model model) {
-		logger.info("Welcome LoginController regi! "+ new Date());
 		
 		return "regi";
 	}
@@ -120,9 +111,6 @@ public class LoginController {
 	//회원가입 결과
 	@RequestMapping(value = "regiAfter.do")
 	public String regiAfter(LoginInfo loginInfo) {
-		logger.info("Welcome LoginController regiAfter! "+ new Date());
-		
-		logger.info("아이디 정보값: " + loginInfo.toString());
 		
 		loginService.addMember(loginInfo);
 		
@@ -131,10 +119,7 @@ public class LoginController {
 	
 	//마이페이지
 	@RequestMapping(value = "mypage.do")
-	public String mypage() {
-		logger.info("Welcome LoginController mypage! "+ new Date());
-		
-		
+	public String mypage() {		
 		
 		return "login/mypage";
 	}
@@ -142,7 +127,6 @@ public class LoginController {
 	//내정보 수정 하기전 보안 체크
 	@RequestMapping(value = "update_info.do")
 	public String update_info(LoginInfo loginInfo) {
-		logger.info("Welcome LoginController update_info! "+ new Date());
 		
 		return "login/updateMyInfoCheck";
 	}
@@ -150,7 +134,6 @@ public class LoginController {
 	// 내 정보 수정 페이지
 	@RequestMapping(value = "update_infoCheck.do")
 	public String update_infoCheck(LoginInfo loginInfo) {
-		logger.info("Welcome LoginController update_infoCheck! "+ new Date());
 		
 		return "login/updateMyInfo";
 	}
@@ -159,7 +142,6 @@ public class LoginController {
 	//내정보 수정 결과
 	@RequestMapping(value = "updateAfter.do")
 	public String updateAfter(LoginInfo loginInfo, HttpServletRequest request) {
-		logger.info("Welcome LoginController updateAfter! "+ new Date());
 		
 		loginService.updateMember(loginInfo);
 		request.getSession().invalidate();
@@ -170,7 +152,6 @@ public class LoginController {
 	//회원 탈퇴
 	@RequestMapping(value = "delete.do")
 	public String delete(@RequestParam String id, Model model, HttpServletRequest request) {
-		logger.info("Welcome LoginController delete! "+ new Date());
 
 		loginService.deleteMember(id);
 		request.getSession().invalidate();
@@ -181,7 +162,6 @@ public class LoginController {
 	//아이디 찾기
 	@RequestMapping(value = "findId.do")
 	public String findId(Model model) {
-		logger.info("Welcome LoginController findId! "+ new Date());
 		
 		return "login/findId";
 	}  
@@ -189,7 +169,6 @@ public class LoginController {
 	//아이디 찾기 결과
 	@RequestMapping(value = "findIdAfter.do")
 	public String findIdAfter(@RequestParam String name, @RequestParam String phone, Model model) {
-		logger.info("Welcome LoginController findIdAfter! "+ new Date());
 
 		String id = loginService.findId(name, phone);
 		
@@ -202,7 +181,6 @@ public class LoginController {
 	//비밀번호 찾기
 	@RequestMapping(value = "findPw.do")
 	public String findPw(Model model) {
-		logger.info("Welcome LoginController findId! "+ new Date());
 		
 		return "login/findPw";
 	}  
@@ -210,7 +188,6 @@ public class LoginController {
 	//비밀번호 찾기 결과
 	@RequestMapping(value = "findPwAfter.do")
 	public String findPwAfter(@RequestParam String id, @RequestParam String name, @RequestParam String phone, Model model) {
-		logger.info("Welcome LoginController findPwAfter! "+ new Date());
 
 		String pw = loginService.findPw(id, name, phone);
 		
@@ -222,11 +199,8 @@ public class LoginController {
 	//비밀번호 찾고 암호변경 후
 	@RequestMapping(value = "updatePw.do")
 	public String updatePw(@RequestParam String id, @RequestParam String pw) {
-		logger.info("Welcome LoginController updatePw! "+ new Date());
 		
 		loginService.updatePw(id, pw);
-		
-		logger.info("업데이트 완료");
 		
 		return "home/home";
 	} 
@@ -237,7 +211,6 @@ public class LoginController {
 	@RequestMapping(value = "UserCheckServlet.do")
 	@ResponseBody
 	public Map<String, Integer> UserCheckServlet(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("Welcome LoginController UserCheckServlet! "+ new Date());
 		
 		String id= request.getParameter("id");
 		int result= loginService.userCheck(id);
@@ -253,7 +226,7 @@ public class LoginController {
 	@RequestMapping(value = "checkIdPw.do")
 	@ResponseBody
 	public Map<String, Integer> checkIdPw(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("Welcome LoginController checkIdPw! "+ new Date());
+		
 		String id= request.getParameter("id");
 		String pw= request.getParameter("pw");
 			
@@ -270,7 +243,6 @@ public class LoginController {
 	// 인기 상품
 	@RequestMapping(value = "polpularProduct.do")
 	public String polpularProduct(Model model) {
-		logger.info("Welcome LoginController polpularProduct! "+ new Date());
 
 		List<String> product_id_list = loginService.selectPopularProduct_id();	
 		List<ProductInfo> productList  = new ArrayList<ProductInfo>();
@@ -288,7 +260,6 @@ public class LoginController {
 	// 계절별 상품
 	@RequestMapping(value = "season.do")
 	public String spring(Model model, @RequestParam String keyword) {
-		logger.info("Welcome LoginController seasonKeyword! "+ new Date());
 
 		List<ProductInfo> productList  = loginService.selectSeasonProduct(keyword);
 				

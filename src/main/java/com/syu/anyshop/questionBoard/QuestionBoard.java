@@ -16,14 +16,14 @@ public class QuestionBoard {
 	  
 	  
 	  // 스크립트문 실행 방지
-	    public String getContents() {
+	  /*  public String getContents() {
 	        return this.contents.replaceAll("(?i)<script", "&lt;script");
-	    }
+	    }*/
 	    
 	    // 스크립트문 실행 방지
-	    public String getTitle() {
+	 /*   public String getTitle() {
 	        return this.title.replaceAll("(?i)<script", "&lt;script");
-	    }
+	    }*/
 
 	
 }

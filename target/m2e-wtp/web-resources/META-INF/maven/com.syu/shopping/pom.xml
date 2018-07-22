@@ -12,6 +12,8 @@
 		<org.springframework-version>4.1.7.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<!-- AspectJ -->
+		<aspectj.version>1.7.4</aspectj.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -33,12 +35,35 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>
+       <!-- Spring AOP -->
+       <dependency>
+             <groupId>org.springframework</groupId>
+             <artifactId>spring-aop</artifactId>
+             <version>${org.springframework-version}</version>
+       </dependency>
+     
+		<!-- aspect -->
+       <dependency>
+             <groupId>org.springframework</groupId>
+             <artifactId>spring-aspects</artifactId>
+             <version>${org.springframework-version}</version>
+       </dependency>
+   
+       <!-- AspectJ -->
+       <dependency>
+             <groupId>org.aspectj</groupId>
+             <artifactId>aspectjrt</artifactId>
+             <version>${org.aspectj-version}</version>
+       </dependency>
+     
+		<!-- aspect weaving -->
+       <dependency>
+             <groupId>org.aspectj</groupId>
+             <artifactId>aspectjweaver</artifactId>
+             <version>${org.aspectj-version}</version>
+       </dependency>
+
+			
 
 		<!-- Logging -->
 		<dependency>
