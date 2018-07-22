@@ -211,7 +211,8 @@
          			
          			
 	         		 //장바구니 버튼 event
-		        	$(document).on("click", "#_addWishList", function() {
+		        	$(document).on("click", "#_addWishList", function() {		        		
+		        		
 		        		hiddenAllPrice = $('#_hiddenAllPrice').val();  //마지막 AllPrice 에 대한 연산 결과가 object형으로 바꼇기 때문에 다시parseInt 해준다.	 
 		        		
 		        		var id = $('#_id').val();
@@ -220,6 +221,12 @@
 	         			var product_img = $('#_product_img').val();
 	         			var wishListInfo = new Array();	
 						var optionData;
+						
+		        		if( id == "" ) {
+		        			alert('로그인 후 이용해주세요.');
+		        			return false;
+		        		}
+		        		
 	         										         					        				        				        				        		
 		        		if(hiddenAllPrice == 0) {
 		        			alert('상품 옵션을 선택해주세요.');
@@ -525,7 +532,6 @@
     </div>
            <!-- 장바구니 담기, 결제 -->
               <div class="col-md-4 col-sm-4 col-xs-12" style="float:right; margin-right:120px;">
-              		<input type="hidden" id="_id" value="${sessionScope.loginInfo.id}">
 					<input type="hidden" id="_product_id" value="${productInfo.product_id}">
 					<input type="hidden" id="_product_name" value="${productInfo.product_name }">
 					<input type="hidden" id="_name" value="${sessionScope.loginInfo.name }">
@@ -758,7 +764,7 @@
 		                   	<input type="hidden" name="product_id" value="${productInfo.product_id }">
 		                   	<input type="hidden" name="product_id" value="${productInfo.product_name }">
 		                   	<input type="hidden" name="product_id" value="${productInfo.product_img }">
-		                   	<input type="hidden" name="id" id="_id" value="${sessionScope.id}" >
+		                   	<input type="hidden" name="id" id="_id" value="${sessionScope.loginInfo.id}" >
 		                   	<input type="hidden" name="age" value="${sessionScope.age}">
 		                      <div>
 		                        <label for="message" style="float:left;">나의 Review</label>
