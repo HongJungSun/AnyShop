@@ -359,6 +359,18 @@
 			<version>0.0.7</version>
 		</dependency>
 		
+		
+		<!-- 마이바티스 쿼리 로그 출력 및 정렬 (보기 좋게) -->
+		<dependency>
+		    <groupId>org.lazyluke</groupId>
+		    <artifactId>log4jdbc-remix</artifactId>
+		    <version>0.2.7</version>
+		</dependency>
+
+	
+		
+		
+		
 		<!-- Mybatis log -->
 		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
         <dependency>

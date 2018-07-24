@@ -5,29 +5,40 @@
 	<!-- Appenders -->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
+		<param name="encoding" value="UTF-8" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
 	
-	<logger name="log4j.xml">
+	<!-- debug Appender -->
+	<appender name="console-debug" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- 쿼리문 Appender -->
+	<appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="   %-5p:  %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Application Loggers -->
+	<logger name="com.syu.anyshop.*" additivity="false">
 		<level value="debug" />
 	</logger>
-	
-	<!-- Application Loggers -->
-	<logger name="com.syu.shopping">
-		<level value="info" />
-	</logger>
-	
+
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
-	
+
 	<logger name="org.springframework.beans">
 		<level value="info" />
 	</logger>
-	
+
 	<logger name="org.springframework.context">
 		<level value="info" />
 	</logger>
@@ -36,10 +47,74 @@
 		<level value="info" />
 	</logger>
 
+
+	<!-- Query Loggers -->
+	<!-- <logger name="jdbc.sqlonly" additivity="false"> <level value="debug" 
+		/> <appender-ref ref="console-infolog" /> </logger> <logger name="jdbc.resultsettable" 
+		additivity="false"> <level value="debug" /> <appender-ref ref="console-infolog" 
+		/> </logger> <logger name="jdbc.sqltiming" additivity="false"> <level value="debug" 
+		/> <appender-ref ref="console-infolog" /> </logger> -->
+
+	<!-- -->
+	<logger name="jdbc.connection" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="console-infolog" />
+	</logger>
+
+	<logger name="jdbc.audit" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="console-infolog" />
+	</logger>
+
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console-infolog" />
+	</logger>
+
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console-infolog" />
+	</logger>
+
+	<logger name="jdbc.resultset" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="console-infolog" />
+	</logger>
+
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console-infolog" />
+	</logger>
+	
+	<logger name="java.sql.Connection" additivity="false">
+		<level value="warn" />
+	</logger>
+
+	<logger name="java.sql.Statement" additivity="false">
+		<level value="warn" />
+	</logger>
+
+	<logger name="java.sql.PreparedStatement" additivity="false">
+		<level value="warn" />
+	</logger>
+
+	<logger name="java.sql.ResultSet" additivity="false">
+		<level value="warn" />
+	</logger>
+
+
+
+
+	<!-- -->
+
+
+
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
-	
+
+
+
 </log4j:configuration>

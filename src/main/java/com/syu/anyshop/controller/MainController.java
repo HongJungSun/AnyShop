@@ -1,14 +1,11 @@
 package com.syu.anyshop.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +19,6 @@ import com.syu.anyshop.searchBox.SearchBoxService;
 
 @Controller
 public class MainController {
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
 	private ProductService productService;
@@ -34,7 +30,6 @@ public class MainController {
 	@RequestMapping(value = "autoComplete.do")
 	@ResponseBody
 	public Map<String, List<ProductInfo>> searchBox(Model model, HttpServletRequest request) {
-		logger.info("Welcome mainController searchBox! " + new Date());
 
 		String searchBox = request.getParameter("value");
 
@@ -49,7 +44,6 @@ public class MainController {
 	// searchBox 키워드 검색 기능
 	@RequestMapping(value = "searchBoxClick.do")
 	public String searchBox(Model model, SearchBoxInfo searchBox) {
-		logger.info("Welcome mainController searchBoxClick! " + new Date());
 
 		List<ProductInfo> list = productService.selectNameProductInfo(searchBox.getSearchBox());
 

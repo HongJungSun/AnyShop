@@ -7,8 +7,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="resources/bootstrap/regijs/bootstrap.min.js"></script>
-     
+    <script src="resources/bootstrap/regijs/bootstrap.min.js"></script>  
           
         
 <section id="aa-myaccount">
@@ -23,6 +22,10 @@
                   <form action="updateAfter.do" name="userInfo" class="aa-login-form" onSubmit="return check();">    
                  	<input type="hidden" name="gender" value="${sessionScope.loginInfo.gender}">       
                     <input type="hidden" name="id" value="${sessionScope.loginInfo.id}">
+                    <input type="hidden" name="height" value="${sessionScope.loginInfo.height}">
+                    <input type="hidden" name="age" value="${sessionScope.loginInfo.age}">
+                    <input type="hidden" name="weight" value="${sessionScope.loginInfo.weight}">
+                    <input type="hidden" name="point" value="${sessionScope.loginInfo.point}">
                     
                                          이름:   <span id="_name1"></span>
                          <input type="text" name="name" id="_name" value="${sessionScope.loginInfo.name}" >                        
@@ -37,10 +40,10 @@
 			 			 <input type="hidden" id="emailCheck" value="emailCheck">
 			 			                 
        			    주소: 
-       			   	    <input type="text" name="address" id="sample4_postcode" value="${sessionScope.loginInfo.address}" placeholder="우편번호" >          			
+       			   	    <input type="text" name="address1" id="sample4_postcode" value="${sessionScope.loginInfo.address1}" placeholder="우편번호" >          			
 						<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
-						<input type="text" name="address" class="form-control" id="sample4_roadAddress" placeholder="기본 주소">
-						<input type="text" name="address" class="form-control" id="sample4_jibunAddress" placeholder="상세주소">
+						<input type="text" name="address2"  id="_address2" value="${sessionScope.loginInfo.address2}" >
+						<input type="text" name="address3"  id="_address3" value="${sessionScope.loginInfo.address3}" >
 						<input type="hidden" id="addressCheck" value="addressCheck">              
                                         
    				 비밀번호:  <span id='_pw1'></span>

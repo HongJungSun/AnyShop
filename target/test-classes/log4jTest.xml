@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+
+<!-- 
+
+log4j,xml 에서 jdbc.sqlonly 로거를 이용하여 쿼리를 출력하도록 하였고, root-context.xml에서 추가한 dataSourceSpied (log4j-remix)가 쿼리를 정렬해주었습니다.
+그리고 jdbc.resultsettable이라는 logger를 추가하여 결과쿼리도 나오게 하였습니다. 이 logger를 없애면 결과테이블도 안나오겠죠 ㅇㅇ;
+이렇게 쿼리를 정렬하여 로그를 남김으로써 개발에 도움이 됩니다.
+마지막으로, 이러한 로거는 당연히 성능에 영향을 미칩니다. 
+그러므로 개발시에만 이렇게 로그를 남기고, 실제 운영에서는 이러한 설정을 없애는게 좋습니다.
+
+ -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- 일반 Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<!-- <param name="Target" value="System.out" /> -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %F -  %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- 쿼리문 Appender -->
+    <appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %5p %m%n" />
+        </layout>
+	</appender>
+
+    <!-- Application Loggers -->
+<!--     <logger name="com.syu.anyshop" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="console"/>
+    </logger>	 -->
+	
+    <!-- Query Loggers -->
+<!--     <logger name="jdbc.sqlonly" additivity="false"> 
+        <level value="debug"/> 
+        <appender-ref ref="console-infolog"/> 
+    </logger>
+
+    <logger name="jdbc.resultsettable" additivity="false"> 
+        <level value="debug"/> 
+        <appender-ref ref="console"/> 
+    </logger> 
+    
+	<logger name="jdbc.sqltiming">
+	    <level value="debug" />
+	</logger> -->
+	
+
+
+	<root>
+		<priority value="warn" />
+		<appender-ref ref="console" />
+	</root>
+
+	
+	
+	
+	
+	
+	<!-- Application Loggers -->
+<!--  	<logger name="com.syu.shopping">
+		<level value="info" />
+	</logger>  -->
+	
+	<!-- 3rdparty Loggers -->
+<!-- 	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger> -->
+
+	<!-- Root Logger -->
+
+	
+</log4j:configuration>
+

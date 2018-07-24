@@ -22,11 +22,10 @@ public class ControllerLoggingAspect {
 	public Object around(ProceedingJoinPoint pjp) throws Throwable {
 		
 		// 규칙 : public object 선언, 인자값 첫번째는 ProceedingJoinPoint
-		logger.info("[" + pjp.getTarget().getClass().getSimpleName() + "->" + pjp.getSignature().getName() + "() START] " + new Date());
-
+		logger.info("[" + pjp.getTarget().getClass().getSimpleName() + "->" + pjp.getSignature().getName() + "() ============================================= START =====================================================  ] " + new Date());
 		Object obj = pjp.proceed();
 
-		logger.info("[" + pjp.getTarget().getClass().getSimpleName() + "->" + pjp.getSignature().getName() + "() END] " + new Date());
+		logger.info("[" + pjp.getTarget().getClass().getSimpleName() + "->" + pjp.getSignature().getName() + "() ============================================== END ===========================================================  ] " + new Date() + "\r\r\r\r\r");
 
 		return obj;
 

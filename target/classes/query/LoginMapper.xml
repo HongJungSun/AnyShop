@@ -36,8 +36,8 @@
 	<!-- 정보 수정 -->
 	<update id="updateMember" parameterType="com.syu.anyshop.login.LoginInfo">
 		UPDATE MEMBER
-		SET ID= #{id}, PW= #{pw},  NAME = #{name}, PHONE = #{phone}, GENDER = #{gender}, EMAIL=#{email}, ADDRESS1=#{address1}, 
-		ADDRESS2=#{address2}, ADDRESS3=#{address3}, height= #{height}, age= #{age}, weight= #{weight}
+		SET ID= #{id}, PW= #{pw},  NAME = #{name}, PHONE = #{phone}, GENDER = #{gender}, EMAIL=#{email}, address1=#{address1}, 
+		address2=#{address2}, address3=#{address3}, point=#{point}, height= #{height}, age= #{age}, weight= #{weight}
 		<where>
 			ID = #{id}
 		</where>

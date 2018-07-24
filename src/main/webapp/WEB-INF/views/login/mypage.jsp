@@ -32,7 +32,9 @@
        			 		 <span id='_email1'></span>
 			 			 <input type="hidden" id="emailCheck" value="emailUnCheck">
 			 			                 
-       			    주소:  <input type="text" name="address" id="_address" value="${sessionScope.loginInfo.address}" disabled>
+       			    주소:  <input type="text" name="address1" id="_address1" value="${sessionScope.loginInfo.address1}" disabled>
+       			    	<input type="text" name="address2"  id="_address2" value="${sessionScope.loginInfo.address2}" disabled>
+						<input type="text" name="address3"  id="_address3" value="${sessionScope.loginInfo.address3}" disabled>
        			   		 <span id='_address1'></span>
            				 <input type="hidden" id="addressCheck" value="addressUnCheck">                
                                         

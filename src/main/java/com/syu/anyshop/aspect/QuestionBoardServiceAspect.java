@@ -23,7 +23,7 @@ public class QuestionBoardServiceAspect {
 			System.out.println("   2.실행결과: NULL ");
 		}
 		
-		System.out.println("   3.실행 완료 ");
+		System.out.println("   3.실행 완료 " +"\r");
 
 		return obj;
 

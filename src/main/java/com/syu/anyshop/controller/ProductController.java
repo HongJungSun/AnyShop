@@ -3,13 +3,10 @@ package com.syu.anyshop.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +28,6 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class ProductController {
-	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
 	@Autowired
 	private ProductService productService;
@@ -46,7 +42,6 @@ public class ProductController {
 	@RequestMapping(value = "product_kindsAllList.do")
 	public String productAllList(Model model, @RequestParam String product_kinds, Page page, String pageNum1,
 			String contentNum1) {
-		logger.info("Welcome productController product_kindsAllList! " + new Date());
 
 		int pageNum = 0;
 		int contentNum = 0;
@@ -143,7 +138,6 @@ public class ProductController {
 	@RequestMapping(value = "productDetailAllList.do")
 	public String productDetailAllList(Model model, @RequestParam String product_kinds,
 			@RequestParam String product_detail, Page page, String pageNum1, String contentNum1) {
-		logger.info("Welcome productController product_kindsAllListDetail! " + new Date());		
 
 		int pageNum = 0;
 		int contentNum = 0;
@@ -243,7 +237,6 @@ public class ProductController {
 	// searchBox를 통한 상품이름으로 검색 시
 	@RequestMapping(value = "productNameProductInfo.do")
 	public String productNameProductInfo(Model model, @RequestParam String searchBox) {
-		logger.info("Welcome productController productNameProductInfo! " + new Date());
 
 		List<ProductInfo> list = productService.selectNameProductInfo(searchBox);
 
@@ -256,7 +249,6 @@ public class ProductController {
 	// 제품 상세보기
 	@RequestMapping(value = "viewProduct.do")
 	public String viewPorduct(Model model, @RequestParam String product_id, Paging paging) {
-		logger.info("Welcome productController viewProduct! " + new Date());
 
 		List<QuestionBoard> list = new ArrayList<QuestionBoard>();
 		ProductInfo productInfo = new ProductInfo();
@@ -297,7 +289,6 @@ public class ProductController {
 	@RequestMapping(value = "autocomplete.do")
 	public void autocomplete(Model model, HttpServletResponse response, @RequestParam String searchBox)
 			throws IOException {
-		logger.info("--------------------- autocomplete 컨트롤러 --------------- " + new Date());
 
 		List<ProductInfo> list1 = new ArrayList<ProductInfo>();
 

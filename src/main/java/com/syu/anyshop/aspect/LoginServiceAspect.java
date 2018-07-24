@@ -18,8 +18,12 @@ public class LoginServiceAspect {
 		System.out.println("   1.호출 메소드 : " + pjp.getSignature().toLongString());
 		Object obj = pjp.proceed();
 		
-		System.out.println("   2.실행결과: " + obj.toString());
-		System.out.println("   3.실행 완료 ");
+		if(obj != null) {
+			System.out.println("   2.실행결과: " + obj.toString());
+		} else {
+			System.out.println("   2.실행결과: NULL ");
+		}
+		System.out.println("   3.실행 완료 " +"\r");
 
 		return obj;
 
