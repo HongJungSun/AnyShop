@@ -2,6 +2,7 @@ package com.syu.anyshop.questionBoard;
 
 import java.util.List;
 
+
 public interface QuestionBoardDao {
 
 	List<QuestionBoard> viewAllQuestionBoard(Paging paging);

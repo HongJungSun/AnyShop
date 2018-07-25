@@ -2,6 +2,8 @@ package com.syu.anyshop.login;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.syu.anyshop.product.ProductInfo;
 
 public interface LoginDao {
@@ -27,6 +29,7 @@ public interface LoginDao {
 
 	int checkIdPw(String id, String pw);
 
+	@Transactional(readOnly=true)
 	List<ProductInfo> mainScreen();
 
 	List<ProductInfo> mainProductAllList(String product_kinds);

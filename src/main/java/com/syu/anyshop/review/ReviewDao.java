@@ -1,5 +1,6 @@
 package com.syu.anyshop.review;
 
+
 public interface ReviewDao {
 
 	void regiReview(ReviewInfo reviewInfo);

@@ -41,7 +41,7 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  <servlet>
+  <!-- <servlet>
     <description></description>
     <display-name>ProductController</display-name>
     <servlet-name>ProductController</servlet-name>
@@ -110,5 +110,5 @@
   <servlet-mapping>
     <servlet-name>Testcomplete</servlet-name>
     <url-pattern>/Testcomplete</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
 </web-app>

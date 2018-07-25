@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.syu.anyshop.login.LoginInfo;
 import com.syu.anyshop.payment.Payment;
@@ -13,6 +15,7 @@ import com.syu.anyshop.searchBox.SearchBoxInfo;
 import com.syu.anyshop.wishlist.WishListInfo;
 
 @Service
+@Transactional(propagation=Propagation.REQUIRED, rollbackFor= {Exception.class})
 public class AdminServiceImpl implements AdminService{
 
 	@Autowired
