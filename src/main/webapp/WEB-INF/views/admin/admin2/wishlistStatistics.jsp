@@ -18,7 +18,7 @@
     			url: "wishListExcel.do", 			
     			success: function(msg) {
     				if(msg.result ==1){
-    					alert('엑셀파일을 만들었습니다.');
+    					alert('AWS EC2 인스턴스에 엑셀파일을 생성하였습니다.');
     				}
     			},
     			error: function(error) {

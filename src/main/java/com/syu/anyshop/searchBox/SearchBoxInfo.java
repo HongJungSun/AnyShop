@@ -6,7 +6,7 @@ import lombok.Data;
 public class SearchBoxInfo {
 	
 	private String id;
-	private int age;
+	private String age;
 	private String gender;
 	private String searchBox;
 	

@@ -31,7 +31,7 @@ public class SearchBoxDaoImpl implements SearchBoxDao {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("searchBox", searchBox.getSearchBox());
 		map.put("id", "비로그인");
-		map.put("age", "비로그인");
+		map.put("age", "0");
 		map.put("gender", "비로그인");	
 		
 		sqlSession.insert("searchBox.regiSearchBox_noSession", map);

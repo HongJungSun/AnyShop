@@ -65,7 +65,7 @@
                         	성별: ${userInfo.gender}
                         </li>
                         <li>
-                        	주소: ${userInfo.address}
+                        	주소: ${userInfo.address1} &nbsp;&nbsp;&nbsp; ${userInfo.address2} &nbsp;&nbsp;&nbsp; ${userInfo.address3}
                         </li>
                         <li>
                           	번호: ${userInfo.phone }

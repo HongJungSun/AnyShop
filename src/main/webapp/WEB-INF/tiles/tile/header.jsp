@@ -80,6 +80,11 @@
 	                  <li class="hidden-xs"><a href="logout.do" onClick="return logout();">로그아웃</a></li>
               	  </ul>              
                 </c:if>
+                
+ 				<ul class="aa-head-top-nav-right">         
+	                  <li class="hidden-xs"><a href="admin.do">관리자 페이지</a></li>
+              	 </ul> 
+ 
                   
   
  				 <c:if test="${sessionScope.id ne 'hjs9760'}">

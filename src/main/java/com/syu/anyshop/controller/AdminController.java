@@ -549,7 +549,7 @@ public class AdminController {
 		// 엑셀파일 세팅 후 파일 생성
 		try {
 
-			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\AnyShop\\매출(등수) 통계.xls"));
+			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\매출(등수) 통계.xls"));
 			// 생성한 엑셀파일을 outputStream 해줍니다.
 			workbook.write(fileOutputStream);
 			fileOutputStream.close();
@@ -661,7 +661,7 @@ public class AdminController {
 		// 엑셀파일 세팅 후 파일 생성
 		try {
 
-			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\AnyShop\\전체 매출 통계.xls"));
+			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\전체 매출 통계.xls"));
 			// 생성한 엑셀파일을 outputStream 해줍니다.
 			workbook.write(fileOutputStream);
 			fileOutputStream.close();
@@ -732,7 +732,7 @@ public class AdminController {
 		// 엑셀파일 세팅 후 파일 생성
 		try {
 
-			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\AnyShop\\검색 키워드 통계.xls"));
+			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\검색 키워드 통계.xls"));
 			// 생성한 엑셀파일을 outputStream 해줍니다.
 			workbook.write(fileOutputStream);
 			fileOutputStream.close();
@@ -816,7 +816,7 @@ public class AdminController {
 		// 엑셀파일 세팅 후 파일 생성
 		try {
 
-			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\AnyShop\\장바구니 통계.xls"));
+			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\장바구니 통계.xls"));
 			// 생성한 엑셀파일을 outputStream 해줍니다.
 			workbook.write(fileOutputStream);
 			fileOutputStream.close();
@@ -888,7 +888,7 @@ public class AdminController {
 		// 엑셀파일 세팅 후 파일 생성
 		try {
 
-			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\AnyShop\\리뷰 통계.xls"));
+			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\리뷰 통계.xls"));
 			// 생성한 엑셀파일을 outputStream 해줍니다.
 			workbook.write(fileOutputStream);
 			fileOutputStream.close();
@@ -972,7 +972,7 @@ public class AdminController {
 		// 엑셀파일 세팅 후 파일 생성
 		try {
 
-			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\AnyShop\\전체 통계.xls"));
+			FileOutputStream fileOutputStream = new FileOutputStream(new File("D:\\전체 통계.xls"));
 			// 생성한 엑셀파일을 outputStream 해줍니다.
 			workbook.write(fileOutputStream);
 			fileOutputStream.close();

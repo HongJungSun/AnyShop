@@ -25,10 +25,11 @@
  		<property name="url" value="jdbc:mysql://127.0.0.1:3306/anyshopdb?useUnicode=true&amp;characterEncoding=utf8"></property>
  		<property name="username" value="root"></property> 
  		<property name="password" value="apmsetup"></property> 
- 		<property name="maxActive" value="30"></property> 
+ 		<property name="maxActive" value="100"></property> 
  		<property name="maxIdle" value="10"></property> 
- 		<property name="maxWait" value="1000"></property>
+ 		<property name="maxWait" value="1000"></property> 
  		<property name="defaultAutoCommit" value="false"></property>
+ 		<property name="validationQuery" value="select 1"></property>
  		
  		<!-- 기본 db  -->
  		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
@@ -37,9 +38,10 @@
  		<property name="password" value="apmsetup"></property> --> 
 		
 		<!-- aws db --> 
-		<!--  <property name="url" value="jdbc:mysql://mydb.cdcenlvdggt9.us-east-2.rds.amazonaws.com:3306/anyshopdb?useUnicode=true&amp;characterEncoding=utf8"></property>
+		<!-- <property name="url" value="jdbc:mysql://mydb.cdcenlvdggt9.us-east-2.rds.amazonaws.com:3306/anyshopdb?useUnicode=true&amp;characterEncoding=utf8"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value="apmsetupup"></property> -->
+		<property name="password" value="apmsetupup"></property> 
+		<property name="validationQuery" value="select 1"></property> -->
 
 	</bean>	
 	
