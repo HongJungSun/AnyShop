@@ -762,8 +762,8 @@
                       <!-- review form -->
 		                   <form action="regiReview.do" class="aa-review-form" method="post">
 		                   	<input type="hidden" name="product_id" value="${productInfo.product_id }">
-		                   	<input type="hidden" name="product_id" value="${productInfo.product_name }">
-		                   	<input type="hidden" name="product_id" value="${productInfo.product_img }">
+		                   	<input type="hidden" name="product_name" value="${productInfo.product_name }">
+		                   	<input type="hidden" name="product_img" value="${productInfo.product_img }">
 		                   	<input type="hidden" name="id" id="_id" value="${sessionScope.loginInfo.id}" >
 		                   	<input type="hidden" name="age" value="${sessionScope.age}">
 		                      <div>
