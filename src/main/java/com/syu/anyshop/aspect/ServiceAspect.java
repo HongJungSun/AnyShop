@@ -6,12 +6,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
-public class AdminServiceAspect {
+public class ServiceAspect {
 
-	@Pointcut("execution(* com.syu.anyshop.admin.AdminService.*(..))")
-	private void adminService() {}
+	@Pointcut("execution(* com.syu.anyshop.*.*Service.*(..))")
+	private void service() {}
 
-	@Around("adminService()")
+	@Around("service()")
 	public Object around(ProceedingJoinPoint pjp) throws Throwable {
 
 		System.out.println("   1.호출 메소드 : " + pjp.getSignature().toLongString());

@@ -18,16 +18,13 @@ public class LoginDaoImpl implements LoginDao{
 	
 	@Override
 	public boolean loginCheck(LoginInfo loginInfo) {
-		int count = Integer.parseInt(sqlSession.selectOne("login.loginCheck", loginInfo).toString()),
-				totalCount = sqlSession.selectOne("login.totalAccount");
-		if(totalCount>0) {
+		int count = sqlSession.selectOne("login.loginCheck", loginInfo);
+
 			if(count>0) {
 				return true;
 			}else {
 				return false;
 			}
-		}
-		return false;
 	}
 
 	@Override

@@ -21,11 +21,7 @@
 			AND
 			PW = #{pw}
 		</where>
-	</select>  
-	
-	  <select id="totalAccount" resultType="integer">
-		SELECT COUNT(*) FROM MEMBER
-	</select> 
+	</select>   
  
 	<!-- 회원가입 -->
 	 <insert id="addMember" parameterType="com.syu.anyshop.login.LoginInfo">

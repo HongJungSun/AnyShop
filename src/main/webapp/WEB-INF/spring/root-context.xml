@@ -16,7 +16,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- 트랜잭션 어노테이션  -->
-	<tx:annotation-driven/>
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<!-- 커넥션 풀 -->
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

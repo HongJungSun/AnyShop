@@ -122,11 +122,10 @@ function requestPay() {
 	
 	else {
 		
-		var paymentListInfo =[];
+		var paymentListInfo =[];        // 결제 상품 정보 배열
 		var i = $('.status').length;    // 결제 상품 총 갯수
-		var amount = 1000 - point;
-		
-		var product_name_Arr = [];
+		var amount = 1000 - point;      // 결제금액 1000으로 고정		
+		var product_name_Arr = [];      // 상품명 담을 배열
 			
 		
 		// 결제 객체에 담기위한 상품명 정보 배열
@@ -156,7 +155,7 @@ function requestPay() {
 		        msg += '카드 승인번호 : ' + rsp.apply_num;	
 		        
 					
-				// Object 데이터에 값넣기
+				// Object 데이터에 결제상품 정보 값넣기
 				for(var k=0; k < i; k++) {
 					paymentObject = new Object();
 					
